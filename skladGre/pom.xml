@@ -19,6 +19,7 @@
 	</properties>
 
 	<dependencies>
+	
 
 		<!-- logging -->
 		<dependency>
@@ -178,7 +179,7 @@
 				<configuration>
 					<scanIntervalSeconds>2</scanIntervalSeconds>
 					<webApp>
-						<contextPath>/tabor/</contextPath>
+						<contextPath>/skladGre/</contextPath>
 					</webApp>
 				</configuration>
 				<dependencies>
