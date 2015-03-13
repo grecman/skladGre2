@@ -65,6 +65,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		emf.setPackagesToScan("cz.greca.tabor.skladGre.entity");
 		emf.setPersistenceProvider(new HibernatePersistenceProvider());
 		Properties jpaProperties = new Properties();
+		// GRE: toto vzdy pri vzniku entityManageru vytvori znova celou db ... takze vse smaze
 		//jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create");
 		jpaProperties.setProperty("hibernate.show_sql", "false");
 		jpaProperties.setProperty("hibernate.dialect",
