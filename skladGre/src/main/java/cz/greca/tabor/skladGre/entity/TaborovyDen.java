@@ -1,65 +1,81 @@
 package cz.greca.tabor.skladGre.entity;
 
+import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
+/**
+ * The persistent class for the "TaborovyDen" database table.
+ * 
+ */
 @Entity
-public class TaborovyDen {
-	
+@Table(name="\"TaborovyDen\"")
+public class TaborovyDen implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue
-    private Integer id; 
-    
-    @Temporal(TemporalType.TIMESTAMP) 
-    @Column(nullable=false) 
-    private Date den; 
+	@SequenceGenerator(name="TABOROVYDEN_ID_GENERATOR", sequenceName="HIBERNATE_SEQUENCE")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TABOROVYDEN_ID_GENERATOR")
+	private Integer id;
 
-    private int norma; 
-    
-    //bi-directional many-to-one association to Sklad 
-    @OneToMany(mappedBy="taborDenFK") 
-    private Set<Sklad> sklad_set; 
+	@Temporal(TemporalType.DATE)
+	private Date den;
 
-    public Integer getId() { 
-            return id; 
-    } 
+	private Integer norma;
 
-    public void setId(Integer id) { 
-            this.id = id; 
-    } 
+	//bi-directional many-to-one association to Sklad
+	@OneToMany(mappedBy="taborovyDen")
+	private Set<Sklad> sklads;
 
-    public Date getDen() { 
-            return den; 
-    } 
+	public TaborovyDen() {
+	}
 
-    public void setDen(Date den) { 
-            this.den = den; 
-    } 
+	public Integer getId() {
+		return this.id;
+	}
 
-    public int getNorma() { 
-            return norma; 
-    } 
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setNorma(int norma) { 
-            this.norma = norma; 
-    } 
+	public Date getDen() {
+		return this.den;
+	}
 
-    public Set<Sklad> getSklad_set() { 
-            return sklad_set; 
-    } 
+	public void setDen(Date den) {
+		this.den = den;
+	}
 
-    public void setSklad_set(Set<Sklad> sklad_set) { 
-            this.sklad_set = sklad_set; 
-    } 
+	public Integer getNorma() {
+		return this.norma;
+	}
 
-	
+	public void setNorma(Integer norma) {
+		this.norma = norma;
+	}
+
+	public Set<Sklad> getSklads() {
+		return this.sklads;
+	}
+
+	public void setSklads(Set<Sklad> sklads) {
+		this.sklads = sklads;
+	}
+
+	public Sklad addSklad(Sklad sklad) {
+		getSklads().add(sklad);
+		sklad.setTaborovyDen(this);
+
+		return sklad;
+	}
+
+	public Sklad removeSklad(Sklad sklad) {
+		getSklads().remove(sklad);
+		sklad.setTaborovyDen(null);
+
+		return sklad;
+	}
 
 }

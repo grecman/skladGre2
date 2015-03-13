@@ -19,7 +19,7 @@
 	</properties>
 
 	<dependencies>
-	
+
 
 		<!-- logging -->
 		<dependency>
@@ -42,7 +42,6 @@
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -71,7 +70,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.1.Final</version>
+			<version>4.3.8.Final</version>
 		</dependency>
 
 		<dependency>
@@ -86,11 +85,11 @@
 			</exclusions>
 		</dependency>
 
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<version>2.3.2</version>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.hsqldb</groupId> -->
+		<!-- <artifactId>hsqldb</artifactId> -->
+		<!-- <version>2.3.2</version> -->
+		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>javax</groupId>
@@ -188,6 +187,14 @@
 						<artifactId>log4j</artifactId>
 						<version>${log4j.version}</version>
 					</dependency>
+					<dependency>
+						<!-- GRE: k serveru (tady Jetty) je treba dat paramert pro instanci 
+							jdbc driveru. Je to v "Run Configurations" -->
+						<!-- PARAMERT_NAME=-Djdbc.drivers VALUE=org.postgresql.Driver -->
+						<groupId>org.postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>9.4-1200-jdbc41</version>
+					</dependency>
 				</dependencies>
 			</plugin>
 			<plugin>
@@ -195,8 +202,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>

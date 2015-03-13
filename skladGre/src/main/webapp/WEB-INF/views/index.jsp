@@ -68,7 +68,9 @@
 			</div>
 		</div>
 		<BR /> <a href="${pageContext.servletContext.contextPath}/potraviny"
-			class="btn" title="Seznam všech zadaných potravin">Potraviny</a>
+			class="btn" title="Seznam všech zadaných potravin">Potraviny</a> <BR /><BR /><BR /><BR />
+		<a href="${pageContext.servletContext.contextPath}/potravina/nova"
+			class="btn" title="Nová potravina">Nová potravina</a>
 
 
 		<div class="pageFooter">

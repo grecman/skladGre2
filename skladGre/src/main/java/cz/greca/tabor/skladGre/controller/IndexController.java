@@ -1,5 +1,9 @@
 package cz.greca.tabor.skladGre.controller;
 
+import java.text.Normalizer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +26,11 @@ import cz.greca.tabor.skladGre.service.TaborovyDenService;
 @RequestMapping()
 public class IndexController {
 
+	public static String removeDiacritics(String s) {
+		return Normalizer.normalize(s, Normalizer.Form.NFD).replaceAll(
+				"\\p{InCombiningDiacriticalMarks}+", "");
+	}
+
 	@Autowired
 	private TaborovyDenService taborovyDenService;
 
@@ -31,28 +40,45 @@ public class IndexController {
 	private static final Logger log = Logger.getLogger(IndexController.class);
 
 	@RequestMapping(value = "/")
-	public String uvodniStranka(HttpServletRequest req, HttpSession session, Model model) {
+	public String uvodniStranka(HttpServletRequest req, HttpSession session,
+			Model model) {
 		log.debug("\t### uvodniStranka ... ");
 
 		List<TaborovyDen> td = taborovyDenService.findAll();
 		model.addAttribute("listTd", td);
-		
+
 		List<Potravina> p = potravinaService.findAll();
 		model.addAttribute("listPot", p);
-		
+
 		return "index";
 	}
 
 	@RequestMapping(value = "/potraviny")
-	public String seznamPotravin(Potravina potravina, HttpServletRequest req, HttpSession session, Model model) {
-		log.debug("\t### potraviny: "+potravina.getJmeno());
+	public String seznamPotravin(Potravina potravina, HttpServletRequest req,
+			HttpSession session, Model model) throws ParseException {
+		log.debug("\t### potraviny: " + potravina.getJmeno());
+
 		return "potraviny";
 	}
-	
+
 	@RequestMapping(headers = "Content-Type=application/json", value = "/autocompleteNazevPotraviny")
 	@ResponseBody
-	public Iterable<String> autocompleteNazevPotraviny(@RequestParam String string) {
-		log.debug("\t### autocompleteNazevPotraviny:"+string);
+	public Iterable<String> autocompleteNazevPotraviny(
+			@RequestParam String string) {
+		log.debug("\t### autocompleteNazevPotraviny:" + string);
 		return potravinaService.findPotravinaByString(string);
 	}
+
+	@RequestMapping(value = "/potravina/nova")
+	public String novaPotravina(Potravina potravina, HttpServletRequest req,
+			HttpSession session, Model model) throws ParseException {
+		log.debug("\t### novaPotravina()");
+
+		Potravina p = new Potravina();
+		p.setJmeno(removeDiacritics("ANANAS"));
+		potravinaService.save(p);
+		
+		return "redirect:/";
+	}
+
 }

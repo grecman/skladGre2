@@ -1,97 +1,103 @@
 package cz.greca.tabor.skladGre.entity;
 
+import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
+/**
+ * The persistent class for the "Sklad" database table.
+ * 
+ */
 @Entity
-public class Sklad {
+@Table(name="\"Sklad\"")
+public class Sklad implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue
-    private long id; 
-    
-    private float cena; 
-    
-    private int uctenka; 
-    
-    @Temporal(TemporalType.TIMESTAMP) 
-    @Column(nullable=false) 
-    private Date datumPrijmu; 
-    
-    @Temporal(TemporalType.TIMESTAMP) 
-    @Column(nullable=true) 
-    private Date datumVydeje; 
-    
-    @ManyToOne 
-    @JoinColumn(name="ID_POTRAVINA", nullable=false) 
-    private Potravina potravFK; 
-    
-    @ManyToOne 
-    @JoinColumn(name="ID_TABOROVY_DEN", nullable=false) 
-    private TaborovyDen taborDenFK; 
+	@SequenceGenerator(name="SKLAD_ID_GENERATOR", sequenceName="HIBERNATE_SEQUENCE")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SKLAD_ID_GENERATOR")
+	private Integer id;
 
-    public long getId() { 
-            return id; 
-    } 
+	private float cena;
 
-    public void setId(long id) { 
-            this.id = id; 
-    } 
+	@Temporal(TemporalType.DATE)
+	@Column(name="\"datumPrijmu\"")
+	private Date datumPrijmu;
 
-    public float getCena() { 
-            return cena; 
-    } 
+	@Temporal(TemporalType.DATE)
+	@Column(name="\"datumVydeje\"")
+	private Date datumVydeje;
 
-    public void setCena(float cena) { 
-            this.cena = cena; 
-    } 
+	private Integer uctenka;
 
-    public int getUctenka() { 
-            return uctenka; 
-    } 
+	//bi-directional many-to-one association to Potravina
+	@ManyToOne
+	@JoinColumn(name="id_potravina")
+	private Potravina potravina;
 
-    public void setUctenka(int uctenka) { 
-            this.uctenka = uctenka; 
-    } 
+	//bi-directional many-to-one association to TaborovyDen
+	@ManyToOne
+	@JoinColumn(name="id_den")
+	private TaborovyDen taborovyDen;
 
-    public Date getDatumPrijmu() { 
-            return datumPrijmu; 
-    } 
+	public Sklad() {
+	}
 
-    public void setDatumPrijmu(Date datumPrijmu) { 
-            this.datumPrijmu = datumPrijmu; 
-    } 
+	public Integer getId() {
+		return this.id;
+	}
 
-    public Date getDatumVydeje() { 
-            return datumVydeje; 
-    } 
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setDatumVydeje(Date datumVydeje) { 
-            this.datumVydeje = datumVydeje; 
-    } 
+	public float getCena() {
+		return this.cena;
+	}
 
-    public Potravina getPotravFK() { 
-            return potravFK; 
-    } 
+	public void setCena(float cena) {
+		this.cena = cena;
+	}
 
-    public void setPotravFK(Potravina potravFK) { 
-            this.potravFK = potravFK; 
-    } 
+	public Date getDatumPrijmu() {
+		return this.datumPrijmu;
+	}
 
-    public TaborovyDen getTaborDenFK() { 
-            return taborDenFK; 
-    } 
+	public void setDatumPrijmu(Date datumPrijmu) {
+		this.datumPrijmu = datumPrijmu;
+	}
 
-    public void setTaborDenFK(TaborovyDen taborDenFK) { 
-            this.taborDenFK = taborDenFK; 
-    } 
+	public Date getDatumVydeje() {
+		return this.datumVydeje;
+	}
 
+	public void setDatumVydeje(Date datumVydeje) {
+		this.datumVydeje = datumVydeje;
+	}
+
+	public Integer getUctenka() {
+		return this.uctenka;
+	}
+
+	public void setUctenka(Integer uctenka) {
+		this.uctenka = uctenka;
+	}
+
+	public Potravina getPotravina() {
+		return this.potravina;
+	}
+
+	public void setPotravina(Potravina potravina) {
+		this.potravina = potravina;
+	}
+
+	public TaborovyDen getTaborovyDen() {
+		return this.taborovyDen;
+	}
+
+	public void setTaborovyDen(TaborovyDen taborovyDen) {
+		this.taborovyDen = taborovyDen;
+	}
 
 }

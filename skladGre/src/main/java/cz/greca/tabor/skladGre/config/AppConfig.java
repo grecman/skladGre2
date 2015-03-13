@@ -33,27 +33,42 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+	public void configureDefaultServletHandling(
+			DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
+
+	// GRE: varianta kdy jsem pouzival DB HSQLBD a data pouze v pameti, ktere se
+	// inicializovala v service InitDbService, a v pom byla pro to nejaka dependence
+	// @Bean
+	// public DataSource dataSource() {
+	// BasicDataSource dataSource = new BasicDataSource();
+	// dataSource.setUrl("jdbc:hsqldb:mem:test");
+	// dataSource.setUsername("sa");
+	// dataSource.setPassword("");
+	// return dataSource;
+	// }
 
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setUrl("jdbc:hsqldb:mem:test");
-		dataSource.setUsername("sa");
-		dataSource.setPassword("");
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/tabor");
+		dataSource.setUsername("skladnik");
+		dataSource.setPassword("gregre");
 		return dataSource;
 	}
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(
+			DataSource dataSource) {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		emf.setPackagesToScan("cz.greca.tabor.skladGre.entity");
 		emf.setPersistenceProvider(new HibernatePersistenceProvider());
 		Properties jpaProperties = new Properties();
-		jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create");
+		//jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create");
 		jpaProperties.setProperty("hibernate.show_sql", "false");
+		jpaProperties.setProperty("hibernate.dialect",
+				"org.hibernate.dialect.PostgreSQLDialect");
 		emf.setJpaProperties(jpaProperties);
 		emf.setDataSource(dataSource);
 		return emf;
@@ -65,5 +80,5 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		transactionManager.setEntityManagerFactory(emf);
 		return transactionManager;
 	}
-	
+
 }

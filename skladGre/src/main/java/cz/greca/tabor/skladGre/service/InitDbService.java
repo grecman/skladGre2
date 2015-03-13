@@ -15,7 +15,11 @@ import cz.greca.tabor.skladGre.entity.TaborovyDen;
 
 @Service
 public class InitDbService {
-
+	
+	// GRE: varianta kdy jsem pouzival DB HSQLBD a data byla ulozena pouze v pameti, ktere se
+	// zde inicializovaly, v AppConfig ma svuj datasource, a v pom byla pro to nejaka dependence
+	
+	/*
 	@Autowired
 	private TaborovyDenService taborovyDenService;
 
@@ -501,6 +505,6 @@ public class InitDbService {
 		{Potravina p = new Potravina(); p.setJmeno(removeDiacritics("ŽAMPIONY STERILOVANÉ")); potravinaService.save(p);}
 		{Potravina p = new Potravina(); p.setJmeno(removeDiacritics("ŽEMLE")); potravinaService.save(p);}
 
-
 	}
+	*/
 }
