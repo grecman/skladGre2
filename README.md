@@ -7,4 +7,5 @@ Nyni je projekt běží na lokalní databázi PostGreSQL.
  
 Spouštění aplikace: mvn jetty:run (popřípadě: clean package jetty:run) ... na http://localhost:8080/skladGre/
 Pro databazi je nutne dát do parametrů webového serveru (v tomto případě embedované JETTY) instanci pro	jdbc driver (v "Run Configurations).
+
 PARAMERT_NAME=-Djdbc.drivers VALUE=org.postgresql.Driver
