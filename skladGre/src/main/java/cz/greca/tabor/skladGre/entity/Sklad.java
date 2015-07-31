@@ -4,13 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
-
-/**
- * The persistent class for the "Sklad" database table.
- * 
- */
 @Entity
-@Table(name="\"Sklad\"")
+@Table(name="sklad", schema="tabor")
 public class Sklad implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,11 +17,11 @@ public class Sklad implements Serializable {
 	private float cena;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="\"datumPrijmu\"")
+	@Column(name="datum_prijmu")
 	private Date datumPrijmu;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="\"datumVydeje\"")
+	@Column(name="datum_vydeje")
 	private Date datumVydeje;
 
 	private Integer uctenka;
@@ -39,7 +34,7 @@ public class Sklad implements Serializable {
 	//bi-directional many-to-one association to TaborovyDen
 	@ManyToOne
 	@JoinColumn(name="id_den")
-	private TaborovyDen taborovyDen;
+	private Den den;
 
 	public Sklad() {
 	}
@@ -92,12 +87,14 @@ public class Sklad implements Serializable {
 		this.potravina = potravina;
 	}
 
-	public TaborovyDen getTaborovyDen() {
-		return this.taborovyDen;
+	public Den getDen() {
+		return den;
 	}
 
-	public void setTaborovyDen(TaborovyDen taborovyDen) {
-		this.taborovyDen = taborovyDen;
+	public void setDen(Den den) {
+		this.den = den;
 	}
+
+
 
 }

@@ -7,32 +7,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cz.greca.tabor.skladGre.entity.TaborovyDen;
+import cz.greca.tabor.skladGre.entity.Den;
 import cz.greca.tabor.skladGre.repository.TaborovyDenRepository;
 
 @Service 
 public class TaborovyDenService { 
  
-        static Logger log = Logger.getLogger(TaborovyDen.class); 
+        static Logger log = Logger.getLogger(Den.class); 
         
         @Autowired
     	private TaborovyDenRepository taborovyDenRepository;
         
         @Transactional
-    	public void save(TaborovyDen taborovyDen) {
+    	public void save(Den taborovyDen) {
     		taborovyDenRepository.save(taborovyDen);
     	}
     	
         @Transactional
-    	public void remove(TaborovyDen taborovyDen) {
+    	public void remove(Den taborovyDen) {
     		taborovyDenRepository.delete(taborovyDen);
     	}
 
-    	public List<TaborovyDen> findAll() {
+    	public List<Den> findAll() {
     		return taborovyDenRepository.findAll();
     	}
 
-    	public TaborovyDen findOne(int id) {
+    	public Den findOne(int id) {
     		return taborovyDenRepository.findOne(id);
     	}
 /*        

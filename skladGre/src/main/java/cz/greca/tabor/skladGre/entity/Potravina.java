@@ -4,13 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Set;
 
-
-/**
- * The persistent class for the "Potravina" database table.
- * 
- */
 @Entity
-@Table(name="\"Potravina\"")
+@Table(name="potravina", schema="tabor")
 public class Potravina implements Serializable {
 	private static final long serialVersionUID = 1L;
 

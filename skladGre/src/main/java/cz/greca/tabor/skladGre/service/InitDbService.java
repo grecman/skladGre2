@@ -5,13 +5,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cz.greca.tabor.skladGre.entity.Potravina;
-import cz.greca.tabor.skladGre.entity.TaborovyDen;
+import cz.greca.tabor.skladGre.entity.Den;
+import cz.greca.tabor.skladGre.entity.User;
 
 @Service
 public class InitDbService {
@@ -19,142 +18,154 @@ public class InitDbService {
 	// GRE: varianta kdy jsem pouzival DB HSQLBD a data byla ulozena pouze v pameti, ktere se
 	// zde inicializovaly, v AppConfig ma svuj datasource, a v pom byla pro to nejaka dependence
 	
-	/*
+	
 	@Autowired
 	private TaborovyDenService taborovyDenService;
 
 	@Autowired
 	private PotravinaService potravinaService;
+	
+	@Autowired
+	private UserService userService;
 
 	public static String removeDiacritics(String s) {
 		return Normalizer.normalize(s, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
 	}
-
-	@PostConstruct
+	
 	public void init() throws ParseException {
+		
+		{
+			User u = new User();
+			u.setNick("greca");
+			u.setPassword("gregre");
+			u.setPocetPrihlaseni(1);
+			u.setPosledniPrihlaseni(new Date());
+			u.setRole("ADMIN");
+			userService.save(u);
+		}
 
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-13");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-13");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-14");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-14");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-15");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-15");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-16");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-16");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-17");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-17");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-18");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-18");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-19");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-19");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-20");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-20");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-21");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-21");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-22");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-22");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-23");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-23");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-24");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-24");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-25");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-25");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-26");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-26");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-27");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-27");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-28");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-28");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-29");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-29");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
 		}
 		{
-			TaborovyDen td = new TaborovyDen();
-			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2014-08-30");
+			Den td = new Den();
+			Date den = new SimpleDateFormat("yyyy-MM-dd").parse("2015-08-30");
 			td.setDen(den);
 			td.setNorma(9000);
 			taborovyDenService.save(td);
@@ -506,5 +517,5 @@ public class InitDbService {
 		{Potravina p = new Potravina(); p.setJmeno(removeDiacritics("ŽEMLE")); potravinaService.save(p);}
 
 	}
-	*/
+	
 }

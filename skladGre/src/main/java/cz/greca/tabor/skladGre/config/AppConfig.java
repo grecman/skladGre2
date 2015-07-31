@@ -33,13 +33,13 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Override
-	public void configureDefaultServletHandling(
-			DefaultServletHandlerConfigurer configurer) {
+	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
 
 	// GRE: varianta kdy jsem pouzival DB HSQLBD a data pouze v pameti, ktere se
-	// inicializovala v service InitDbService, a v pom byla pro to nejaka dependence
+	// inicializovala v service InitDbService, a v pom byla pro to nejaka
+	// dependence
 	// @Bean
 	// public DataSource dataSource() {
 	// BasicDataSource dataSource = new BasicDataSource();
@@ -52,24 +52,23 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/tabor");
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/greca");
 		dataSource.setUsername("skladnik");
 		dataSource.setPassword("gregre");
 		return dataSource;
 	}
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-			DataSource dataSource) {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		emf.setPackagesToScan("cz.greca.tabor.skladGre.entity");
 		emf.setPersistenceProvider(new HibernatePersistenceProvider());
 		Properties jpaProperties = new Properties();
-		// GRE: toto vzdy pri vzniku entityManageru vytvori znova celou db ... takze vse smaze
-		//jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create");
+		// GRE: toto vzdy pri vzniku entityManageru vytvori znova celou db ...
+		// takze vse smaze
+		// jpaProperties.setProperty("hibernate.hbm2ddl.auto", "create");
 		jpaProperties.setProperty("hibernate.show_sql", "false");
-		jpaProperties.setProperty("hibernate.dialect",
-				"org.hibernate.dialect.PostgreSQLDialect");
+		jpaProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 		emf.setJpaProperties(jpaProperties);
 		emf.setDataSource(dataSource);
 		return emf;
