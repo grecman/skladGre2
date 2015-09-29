@@ -20,6 +20,17 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet.jsp.jstl</groupId>
+			<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+			<version>1.2.1</version>
+		</dependency>
 
 		<!-- logging -->
 		<dependency>
@@ -41,6 +52,7 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -171,6 +183,7 @@
 	<build>
 		<finalName>skladGre</finalName>
 		<plugins>
+		<!--  
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
@@ -188,15 +201,12 @@
 						<version>${log4j.version}</version>
 					</dependency>
 					<dependency>
-						<!-- GRE: k serveru (tady Jetty) je treba dat paramert pro instanci 
-							jdbc driveru. Je to v "Run Configurations" -->
-						<!-- PARAMERT_NAME=-Djdbc.drivers VALUE=org.postgresql.Driver -->
 						<groupId>org.postgresql</groupId>
 						<artifactId>postgresql</artifactId>
 						<version>9.4-1200-jdbc41</version>
 					</dependency>
 				</dependencies>
-			</plugin>
+			</plugin>-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

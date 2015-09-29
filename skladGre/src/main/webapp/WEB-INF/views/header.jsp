@@ -13,17 +13,10 @@
 			</div>
 		</div>
 		 
-		<div class="menu2">
-		<HR />
-		<!-- 
-			<a class="${selectedMenu eq 'kalkulace' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/srv/kalkulace/detail">Kalkulace a modely</a>
-			<a class="${selectedMenu eq 'predstavitel' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/srv/predstavitel/seznam">Představitelé</a>
-			<a class="${selectedMenu eq 'archiv' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/srv/archiv/kalkulace">Archív</a>
-			<a class="${selectedMenu eq 'mv' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/srv/mv/kalkulace">MV</a>
-			<a class="${selectedMenu eq 'offline' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/srv/offline">Off-line</a>
- 			<a class="${selectedMenu eq 'monitoring' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/srv/monitoring/logging">Monitoring</a>  
-			<a class="${selectedMenu eq 'napoveda' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/srv/napoveda">Nápověda</a> 
-		 -->
+		<div class="menu">
+			<a class="${selectedMenu eq 'login' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/login/logged">Login</a>
+			<a class="${selectedMenu eq 'td' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/td/seznam">Táborové dny</a>
+			<a class="${selectedMenu eq 'potraviny' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/potravina/potraviny">Potraviny</a>
 		</div>
 	</div>
 </jsp:root>

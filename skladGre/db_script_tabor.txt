@@ -3,6 +3,11 @@
 CREATE ROLE skladnik LOGIN ENCRYPTED PASSWORD 'md599f11e5dc38f3ca02e47b5cb07bdae15'
    VALID UNTIL 'infinity';
 
+
+CREATE DATABASE greca;
+
+-- vse ostatni jiz spouste po DB greca !!!
+
 CREATE SCHEMA tabor;
 
 

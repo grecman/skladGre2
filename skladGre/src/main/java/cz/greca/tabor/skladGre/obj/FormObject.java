@@ -5,6 +5,8 @@ public class FormObject {
 	private String nick;
 	
 	private String password;
+	
+	private String role;
 
 	public String getNick() {
 		return nick;
@@ -20,6 +22,16 @@ public class FormObject {
 
 	public void setPassword(String password) {
 		this.password = password;
+		
+		
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	

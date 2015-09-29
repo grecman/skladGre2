@@ -27,8 +27,8 @@
 				$.ajax({
 					url : "./autocompleteNazevPotraviny.json?string=" + input,
 					dataType : 'json',
-				    type : 'POST',
-				    contentType: "application/json"
+					type : 'POST',
+					contentType : "application/json"
 				}).done(function(data) {
 					response(data);
 				});
@@ -39,20 +39,23 @@
 
 </head>
 <body>
-	<BR />
-	<a href="${pageContext.servletContext.contextPath}/" class="btn">Index</a>
-	<BR />
-	<BR />
 
-	<form:form commandName="potravina" id="formPotravina" action="${pageContext.servletContext.contextPath}/potraviny">
-		<form:input path="jmeno" id="inputNazevPotraviny" style="width: 400px;"></form:input>
-		<input type="submit" class="btn"></input>
-	</form:form>
-	
-	
-	<div class="pageFooter">
-		<jsp:include page="footerInfo.jsp" />
+	<div class="page">
+		<jsp:include page="header.jsp"></jsp:include>
+		<div class="mainAreaWide">
+			<form:form commandName="potravina" id="formPotravina"
+				action="${pageContext.servletContext.contextPath}/potraviny">
+				<form:input path="jmeno" id="inputNazevPotraviny"
+					style="width: 400px;"></form:input>
+				<input type="submit" class="btn"></input>
+			</form:form>
+		</div>
+		<div class="pageFooter">
+			<jsp:include page="footerInfo.jsp" />
+		</div>
 	</div>
+
+
 
 </body>
 	</html>

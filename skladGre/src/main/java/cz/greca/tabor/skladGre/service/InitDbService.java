@@ -18,7 +18,7 @@ public class InitDbService {
 	// GRE: varianta kdy jsem pouzival DB HSQLBD a data byla ulozena pouze v pameti, ktere se
 	// zde inicializovaly, v AppConfig ma svuj datasource, a v pom byla pro to nejaka dependence
 	
-	
+/*	
 	@Autowired
 	private TaborovyDenService taborovyDenService;
 
@@ -33,16 +33,6 @@ public class InitDbService {
 	}
 	
 	public void init() throws ParseException {
-		
-		{
-			User u = new User();
-			u.setNick("greca");
-			u.setPassword("gregre");
-			u.setPocetPrihlaseni(1);
-			u.setPosledniPrihlaseni(new Date());
-			u.setRole("ADMIN");
-			userService.save(u);
-		}
 
 		{
 			Den td = new Den();
@@ -517,5 +507,5 @@ public class InitDbService {
 		{Potravina p = new Potravina(); p.setJmeno(removeDiacritics("ŽEMLE")); potravinaService.save(p);}
 
 	}
-	
+*/	
 }
