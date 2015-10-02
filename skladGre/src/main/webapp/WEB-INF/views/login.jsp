@@ -51,6 +51,7 @@
 
 		<div class="mainAreaWide">
 			<c:if test="${empty listUser or userRole=='ADMIN'}">
+				<H3>Registrace nového uživatele</H3>
 				<div class="formBar">
 					<form:form commandName="formObject"
 						action="${pageContext.servletContext.contextPath}/gre/login/newUser">
@@ -60,21 +61,22 @@
 						</SPAN>
 						<SPAN>Password:</SPAN>
 						<SPAN> <form:input path="password" id="password"
-								class="textovePole" cssStyle="width:160px; color:#dfe0e0;"></form:input>
+								type="password" class="textovePole" cssStyle="width:160px;"></form:input>
 						</SPAN>
 						<SPAN>Role:</SPAN>
-						<SPAN title="Seznam rolí: ADMIN, READER, HOSPODAR"> <form:input
-								path="role" id="role" class="textovePole"
-								cssStyle="width:160px;"></form:input>
+						<SPAN> <form:select path="role">
+								<form:option value="READER">READER</form:option>
+								<form:option value="USER">USER</form:option>
+								<form:option value="ADMIN">ADMIN</form:option>
+							</form:select>
 						</SPAN>
-
 						<SPAN><input type="submit" id="formButton" value="OK"
 							class="heroBtn" style="display: inline; margin-left: 25px;"></input></SPAN>
 					</form:form>
 				</div>
-
 			</c:if>
-			<c:if test="${not empty listUser}">
+			<c:if test="${not empty listUser and empty userLogin}">
+				<H3>Přihlášení uživatele</H3>
 				<div class="formBar">
 					<form:form commandName="formObject"
 						action="${pageContext.servletContext.contextPath}/gre/login/enterLogin">
@@ -86,7 +88,7 @@
 							</form:select>
 						</SPAN>
 						<SPAN> <form:input path="password" id="password"
-								class="textovePole" cssStyle="width:160px; color:#dfe0e0;"></form:input>
+								type="password" class="textovePole" cssStyle="width:160px;"></form:input>
 							<input type="submit" id="formButton" value="OK" class="heroBtn"
 							style="display: inline; margin-left: 25px;"></input>
 						</SPAN>
@@ -94,36 +96,53 @@
 				</div>
 			</c:if>
 
-			<H2 style="color: red;">${errorMessage}</H2>
-
 			<c:if test="${not empty listUser}">
 				<H3>Seznam registrovaných uživatelů</H3>
 				<table id="XXXtableId" style="table-layout: fixed;">
 					<col width="95px" />
 					<col width="80px" />
-					<col width="80px" />
+					<col width="10px" />
+					<col width="10px" />
+					<col width="10px" />
+					<col width="10px" />
 					<thead>
 						<tr style="background-color: #dfe0e0;">
 							<th style="font-size: x-small;">Uživatel</th>
 							<th style="font-size: x-small;">Role</th>
-							<th style="font-size: x-small;"></th>
+							<c:if test="${fn:contains(userRole, 'ADMIN')}">
+								<th colspan="4">Admin setting</th>
+							</c:if>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${listUser}" var="i">
 							<tr style="background-color: white;">
 								<td align="left"
-									title="${i.pocetPrihlaseni}-${i.posledniPrihlaseni}">${i.nick}</td>
+									title="${i.pocetPrihlaseni}...${i.posledniPrihlaseni}">${i.nick}</td>
 								<td align="left">${i.role}</td>
-								<td align="center"><c:if
-										test="${fn:contains(userRole, 'ADMIN')}">
-										<a
-											onClick="return confirm('Fakt chceš odstřelit ${i.nick} ???')"
-											href="${pageContext.servletContext.contextPath}/gre/login/deleteUser/${i.nick}">
-											<img title="${i.password}" style="border: 0px;"
+								<c:if test="${fn:contains(userRole, 'ADMIN')}">
+									<td align="center"><a
+										onClick="return confirm('Fakt chceš odstřelit ${i.nick} ???')"
+										href="${pageContext.servletContext.contextPath}/gre/login/deleteUser/${i.nick}">
+											<img title="Smazat uživatele!" style="border: 0px;"
 											src="${pageContext.servletContext.contextPath}/resources/ico/zrusit.png" />
-										</a>
-									</c:if></td>
+									</a></td>
+									<form:form commandName="formObject"
+										action="${pageContext.servletContext.contextPath}/gre/login/changeParamUser">
+										<form:hidden path="nick" value="${i.nick}"/>
+										<td align="center"><form:input path="password" type="password"
+												id="password" class="textovePole" cssStyle="width:140px;"
+												title="Zadej nove heslo (pův.: ${i.password})"></form:input></td>
+										<td align="center"><form:select path="role">
+												<form:option value="${i.role}">${i.role}</form:option>
+												<form:option value="READER">READER</form:option>
+												<form:option value="USER">USER</form:option>
+												<form:option value="ADMIN">ADMIN</form:option>
+											</form:select></td>
+										<td align="center"><input type="submit" id="formButton"
+											value="OK" onClick="return confirm('Fakt???')"></input></td>
+									</form:form>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -131,6 +150,8 @@
 			</c:if>
 
 		</div>
+
+		<H2 style="color: red; padding-left: 20px;">${errorMessage}</H2>
 
 		<!-- 
 		<BR /> <a href="${pageContext.servletContext.contextPath}/potraviny"

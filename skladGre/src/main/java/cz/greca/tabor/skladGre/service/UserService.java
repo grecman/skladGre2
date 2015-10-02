@@ -2,6 +2,10 @@ package cz.greca.tabor.skladGre.service;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +21,10 @@ public class UserService {
 	private UserRepository userRepository;
 	
 	static Logger log = Logger.getLogger("taborLogger"); 
+	
+	//@PersistenceContext(name = "UserService")
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	public void save(User user) {
 		log.debug("###\t save()");
@@ -41,6 +49,17 @@ public class UserService {
 	public User findbyNick(String nick) {
 		log.debug("###\t findbyNick("+nick+ ")");
 		return userRepository.findbyNick(nick);
+	}
+	
+	public List<User> findNickByRole(String role){
+		List<User> gre;
+		log.debug("###\t findNickByRole("+role+ ")");
+		try {
+			gre = entityManager.createQuery("SELECT g FROM User g WHERE g.role=:role ", User.class).setParameter("role", role).getResultList();
+		} catch (NoResultException e) {
+			return null;
+		}
+		return gre;
 	}
 
 }

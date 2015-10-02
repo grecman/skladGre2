@@ -6,7 +6,7 @@
 		<!-- pri prazdnem tagu v DIVu prohlizece neumeji tento div uzavrit a ignoruji nasledujici /DIV, proto tento vyse vlozeny script -->
 	</div>
 	<div class="header">
-		<div class="title">GreSklad | ${pageTitle}</div>
+		<div class="title"><a href="${pageContext.servletContext.contextPath}/index.html">Táborový sklad</a> | ${pageTitle}</div>
 		<div class="info">
 			<div class="user">
 				<span id="uzivatel" title="${userRole}">Uživatel:&#160;${userLogin}&#160;</span>

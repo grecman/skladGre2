@@ -46,9 +46,9 @@ public class UserController {
 
 		if (ses.getAttribute("userLogin") == null) {
 			ses.setAttribute("errorMessage", "Uživatel není přihlášen.");
-			return "redirect:/login/1.html";
+			return "redirect:/gre/login/1";
 		} else {
-			ses.setAttribute("errorMessage", "");
+			// ses.setAttribute("errorMessage", "");
 			List<User> u = userService.findAll();
 			model.addAttribute("listUser", u);
 			return "login";
@@ -60,8 +60,12 @@ public class UserController {
 		log.debug("###\t newUser(" + formObject.getNick().toUpperCase() + ", " + formObject.getRole() + ", " + formObject.getPassword() + ")");
 
 		List<User> allU = userService.findAll();
-		System.out.println(allU);
 		User u = userService.findbyNick(formObject.getNick().toUpperCase());
+
+		if (formObject.getRole().isEmpty() || formObject.getPassword().isEmpty()) {
+			ses.setAttribute("errorMessage", "Heslo nebo role nebyla vyplněna!");
+			return "redirect:/gre/errorPage";
+		}
 
 		if (u == null) {
 			User newUser = new User();
@@ -69,6 +73,8 @@ public class UserController {
 			if (allU == null || allU.isEmpty()) {
 			// prvni uzivatel musi byt vzdy admin!
 			newUser.setRole("ADMIN");
+			} else if (formObject.getRole() == null || formObject.getRole().isEmpty()) {
+			newUser.setRole(formObject.getRole().toUpperCase());
 			} else {
 			newUser.setRole(formObject.getRole().toUpperCase());
 			}
@@ -94,6 +100,7 @@ public class UserController {
 			u.setPocetPrihlaseni(u.getPocetPrihlaseni() + 1);
 			u.setPosledniPrihlaseni(new Date());
 			userService.save(u);
+			ses.setAttribute("errorMessage", "");
 			return "redirect:/gre/login/logged";
 		} else {
 			ses.setAttribute("errorMessage", "Nesprávné heslo!");
@@ -104,7 +111,43 @@ public class UserController {
 	@RequestMapping(value = "/deleteUser/{nick}")
 	public String deleteUser(@PathVariable String nick, HttpServletRequest req, HttpSession ses, Model model) {
 		log.debug("###\t deleteUser(" + nick + ")");
+
+		List<User> ul = userService.findAll();
+		int i = 0;
+		for (User usr : ul) {
+			if (usr.getRole().startsWith("ADMIN")) {
+			i++;
+			}
+		}
+		if (i <= 1) {
+			ses.setAttribute("errorMessage", "Snažite se zrušit posledního ADMINa v aplikaci! Což nelze.");
+			return "redirect:/gre/errorPage";
+		}
+
 		userService.delete(userService.findbyNick(nick));
+		return "redirect:/gre/login/logged";
+	}
+
+	@RequestMapping(value = "/changeParamUser")
+	public String deleteUser(FormObject formObject, HttpServletRequest req, HttpSession ses, Model model) {
+		log.debug("###\t changeParamUser(" + formObject.getNick() + ", " + formObject.getRole() + ", " + formObject.getPassword() + ")");
+
+		User u = userService.findbyNick(formObject.getNick());
+
+		if (u.getRole().startsWith("ADMIN") && !formObject.getRole().startsWith("ADMIN")) {
+			List<User> ul = userService.findNickByRole(formObject.getRole());
+			System.out.println(ul.size() + "\t" + ul.get(0).getNick());
+
+			if (ul.size() <= 1) {
+			ses.setAttribute("errorMessage", "Snažite se zrušit posledního ADMINa v aplikaci! Což nelze.");
+			return "redirect:/gre/errorPage";
+			}
+		}
+
+		u.setPassword(formObject.getPassword().isEmpty() ? u.getPassword() : formObject.getPassword());
+		u.setRole(formObject.getRole());
+		userService.save(u);
+
 		return "redirect:/gre/login/logged";
 	}
 
