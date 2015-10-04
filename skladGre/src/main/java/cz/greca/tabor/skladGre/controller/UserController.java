@@ -112,16 +112,15 @@ public class UserController {
 	public String deleteUser(@PathVariable String nick, HttpServletRequest req, HttpSession ses, Model model) {
 		log.debug("###\t deleteUser(" + nick + ")");
 
-		List<User> ul = userService.findAll();
-		int i = 0;
-		for (User usr : ul) {
-			if (usr.getRole().startsWith("ADMIN")) {
-			i++;
-			}
-		}
-		if (i <= 1) {
-			ses.setAttribute("errorMessage", "Snažite se zrušit posledního ADMINa v aplikaci! Což nelze.");
+		User u = userService.findbyNick(nick);
+		
+		if (u.getRole().startsWith("ADMIN")) {
+			List<User> ul = userService.findNickByRole("ADMIN");
+
+			if (ul.size() <= 1) {
+			ses.setAttribute("errorMessage", "Snažite se smazat posledního ADMINa v aplikaci! Což nelze.");
 			return "redirect:/gre/errorPage";
+			}
 		}
 
 		userService.delete(userService.findbyNick(nick));
@@ -133,10 +132,9 @@ public class UserController {
 		log.debug("###\t changeParamUser(" + formObject.getNick() + ", " + formObject.getRole() + ", " + formObject.getPassword() + ")");
 
 		User u = userService.findbyNick(formObject.getNick());
-
+		
 		if (u.getRole().startsWith("ADMIN") && !formObject.getRole().startsWith("ADMIN")) {
-			List<User> ul = userService.findNickByRole(formObject.getRole());
-			System.out.println(ul.size() + "\t" + ul.get(0).getNick());
+			List<User> ul = userService.findNickByRole("ADMIN");
 
 			if (ul.size() <= 1) {
 			ses.setAttribute("errorMessage", "Snažite se zrušit posledního ADMINa v aplikaci! Což nelze.");

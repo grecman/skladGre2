@@ -9,7 +9,7 @@
 		<div class="title"><a href="${pageContext.servletContext.contextPath}/index.html">Táborový sklad</a> | ${pageTitle}</div>
 		<div class="info">
 			<div class="user">
-				<span id="uzivatel" title="${userRole}">Uživatel:&#160;${userLogin}&#160;</span>
+				<span id="uzivatel" title="${userRole}">&#160;${userLogin}&#160;</span>
 			</div>
 		</div>
 		 
