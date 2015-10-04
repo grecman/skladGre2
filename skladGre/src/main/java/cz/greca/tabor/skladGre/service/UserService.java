@@ -40,15 +40,20 @@ public class UserService {
 		log.debug("###\t findAll()");
 		return userRepository.findAll();
 	}
-
-	public User findOne(int id) {
+	
+	public List<User> findAllByOrderByNickAsc() {
+		log.debug("###\t findAllByOrderByNickAsc()");
+		return userRepository.findAllByOrderByNickAsc();
+	}
+	
+	public User findOne(long id) {
 		log.debug("###\t findOne("+id+ ")");
 		return userRepository.findOne(id);
 	}
 	
 	public User findbyNick(String nick) {
 		log.debug("###\t findbyNick("+nick+ ")");
-		return userRepository.findbyNick(nick);
+		return userRepository.findByNick(nick);
 	}
 	
 	public List<User> findNickByRole(String role){

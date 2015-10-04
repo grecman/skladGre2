@@ -33,10 +33,14 @@ public class UserController {
 		ses.setAttribute("pageTitle", "Logovací obrazovka");
 		ses.setAttribute("userLogin", "");
 		ses.setAttribute("userRole", "");
+		
+		ses.setAttribute("userLogin", "GRECA");
+		ses.setAttribute("userRole", "ADMIN");
+		return "redirect:/gre/td/seznam";
 
-		List<User> u = userService.findAll();
-		model.addAttribute("listUser", u);
-		return "login";
+//		List<User> u = userService.findAllByOrderByNickAsc();
+//		model.addAttribute("listUser", u);
+//		return "login";
 	}
 
 	@RequestMapping(value = "/logged")
@@ -49,7 +53,7 @@ public class UserController {
 			return "redirect:/gre/login/1";
 		} else {
 			// ses.setAttribute("errorMessage", "");
-			List<User> u = userService.findAll();
+			List<User> u = userService.findAllByOrderByNickAsc();
 			model.addAttribute("listUser", u);
 			return "login";
 		}
@@ -128,7 +132,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/changeParamUser")
-	public String deleteUser(FormObject formObject, HttpServletRequest req, HttpSession ses, Model model) {
+	public String changeParamUser(FormObject formObject, HttpServletRequest req, HttpSession ses, Model model) {
 		log.debug("###\t changeParamUser(" + formObject.getNick() + ", " + formObject.getRole() + ", " + formObject.getPassword() + ")");
 
 		User u = userService.findbyNick(formObject.getNick());

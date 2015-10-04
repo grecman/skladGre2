@@ -20,7 +20,7 @@ import cz.greca.tabor.skladGre.entity.Potravina;
 import cz.greca.tabor.skladGre.entity.User;
 import cz.greca.tabor.skladGre.obj.FormObject;
 import cz.greca.tabor.skladGre.service.PotravinaService;
-import cz.greca.tabor.skladGre.service.TaborovyDenService;
+import cz.greca.tabor.skladGre.service.DenService;
 import cz.greca.tabor.skladGre.service.UserService;
 
 @Controller
@@ -32,7 +32,7 @@ public class PotravinaController {
 	}
 
 	@Autowired
-	private TaborovyDenService taborovyDenService;
+	private DenService taborovyDenService;
 
 	@Autowired
 	private PotravinaService potravinaService;

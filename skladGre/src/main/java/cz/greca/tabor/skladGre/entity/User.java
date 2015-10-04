@@ -12,7 +12,7 @@ public class User implements Serializable {
 	@Id
 	@SequenceGenerator(name="USERS_ID_GENERATOR", sequenceName="tabor.HIBERNATE_SEQUENCE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USERS_ID_GENERATOR")
-	private Integer id;
+	private long id;
 
 	private String nick;
 
@@ -30,11 +30,11 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public Integer getId() {
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

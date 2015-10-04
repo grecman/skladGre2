@@ -13,7 +13,7 @@ public class Den implements Serializable {
 	@Id
 	@SequenceGenerator(name="TABOROVYDEN_ID_GENERATOR", sequenceName="tabor.HIBERNATE_SEQUENCE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TABOROVYDEN_ID_GENERATOR")
-	private Integer id;
+	private long id;
 
 	@Temporal(TemporalType.DATE)
 	private Date den;
@@ -27,11 +27,11 @@ public class Den implements Serializable {
 	public Den() {
 	}
 
-	public Integer getId() {
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

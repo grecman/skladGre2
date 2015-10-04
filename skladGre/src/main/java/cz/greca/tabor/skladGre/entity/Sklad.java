@@ -12,7 +12,7 @@ public class Sklad implements Serializable {
 	@Id
 	@SequenceGenerator(name="SKLAD_ID_GENERATOR", sequenceName="tabor.HIBERNATE_SEQUENCE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SKLAD_ID_GENERATOR")
-	private Integer id;
+	private long id;
 
 	private float cena;
 
@@ -39,11 +39,11 @@ public class Sklad implements Serializable {
 	public Sklad() {
 	}
 
-	public Integer getId() {
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

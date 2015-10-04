@@ -12,7 +12,7 @@ public class Potravina implements Serializable {
 	@Id
 	@SequenceGenerator(name="POTRAVINA_ID_GENERATOR", sequenceName="tabor.HIBERNATE_SEQUENCE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="POTRAVINA_ID_GENERATOR")
-	private Integer id;
+	private long id;
 
 	private String jmeno;
 
@@ -23,11 +23,11 @@ public class Potravina implements Serializable {
 	public Potravina() {
 	}
 
-	public Integer getId() {
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
