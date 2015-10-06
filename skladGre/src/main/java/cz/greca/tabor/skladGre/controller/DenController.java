@@ -3,7 +3,6 @@ package cz.greca.tabor.skladGre.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cz.greca.tabor.skladGre.entity.Den;
 import cz.greca.tabor.skladGre.obj.FormObject;
 import cz.greca.tabor.skladGre.service.DenService;
-import cz.greca.tabor.skladGre.service.UserService;
 
 @Controller
 @RequestMapping("/td")
@@ -26,9 +24,6 @@ public class DenController {
 
 	@Autowired
 	private DenService denService;
-
-	@Autowired
-	private UserService userService;
 
 	private static final Logger log = Logger.getLogger(DenController.class);
 
@@ -62,13 +57,14 @@ public class DenController {
 		return "redirect:/gre/td/seznam";
 	}
 
-	@RequestMapping("/deleteTdAll")
-	public String deleteTdAll(FormObject formObject, HttpServletRequest req, HttpSession ses, Model model) throws ParseException {
-		log.debug("###\t deleteTdAll()");
-		List<Den> d = denService.findAll();
-		for (Den den : d) {
-			denService.remove(den);
-		}
+	@RequestMapping("/deleteAll")
+	public String deleteAll(FormObject formObject, HttpServletRequest req, HttpSession ses, Model model) throws ParseException {
+		log.debug("###\t deleteAll()");
+		denService.deleteAll();
+//		List<Den> d = denService.findAll();
+//		for (Den den : d) {
+//			denService.delete(den);
+//		}
 		return "redirect:/gre/td/seznam";
 	}
 

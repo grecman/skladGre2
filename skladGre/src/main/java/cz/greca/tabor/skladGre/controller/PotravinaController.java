@@ -2,7 +2,6 @@ package cz.greca.tabor.skladGre.controller;
 
 import java.text.Normalizer;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,16 +11,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cz.greca.tabor.skladGre.entity.Potravina;
-import cz.greca.tabor.skladGre.entity.User;
 import cz.greca.tabor.skladGre.obj.FormObject;
 import cz.greca.tabor.skladGre.service.PotravinaService;
-import cz.greca.tabor.skladGre.service.DenService;
-import cz.greca.tabor.skladGre.service.UserService;
 
 @Controller
 @RequestMapping("/potravina")
@@ -32,20 +29,17 @@ public class PotravinaController {
 	}
 
 	@Autowired
-	private DenService taborovyDenService;
-
-	@Autowired
 	private PotravinaService potravinaService;
-
-	@Autowired
-	private UserService userService;
 
 	private static final Logger log = Logger.getLogger(PotravinaController.class);
 
-	@RequestMapping(value = "/potraviny")
-	public String seznamPotravin(Potravina potravina, HttpServletRequest req, HttpSession ses, Model model) throws ParseException {
+	@RequestMapping(value = "/seznam")
+	public String seznamPotravin(FormObject formObject, HttpServletRequest req, HttpSession ses, Model model) throws ParseException {
 		log.debug("###\t seznamPotravin()");
 		ses.setAttribute("pageTitle", "Seznam potravin");
+
+		List<Potravina> p = potravinaService.findAll();
+		model.addAttribute("listPotravina", p);
 
 		return "potraviny";
 	}
@@ -57,15 +51,44 @@ public class PotravinaController {
 		return potravinaService.findPotravinaByString(string);
 	}
 
-	@RequestMapping(value = "/potravina/nova")
-	public String novaPotravina(Potravina potravina, HttpServletRequest req, HttpSession session, Model model) throws ParseException {
-		log.debug("### novaPotravina()");
+	@RequestMapping(value = "/nova")
+	public String nova(FormObject formObject, HttpServletRequest req, HttpSession session, Model model) throws ParseException {
+		log.debug("### nova("+formObject.getJmeno()+")");
 
-		Potravina p = new Potravina();
-		p.setJmeno(removeDiacritics("ANANAS"));
+		 Potravina p = new Potravina();
+		 p.setJmeno(removeDiacritics(formObject.getJmeno().toUpperCase()));
+		 potravinaService.save(p);
+
+		return "redirect:/gre/potravina/seznam";
+	}
+
+	@RequestMapping(value = "/deleteAll")
+	public String deleteAll(FormObject formObject, HttpServletRequest req, HttpSession session, Model model) throws ParseException {
+		log.debug("### deleteAll()");
+		
+		potravinaService.deleteAll();
+		
+		return "redirect:/gre/potravina/seznam";
+	}
+
+	@RequestMapping(value = "/delete/{id}")
+	public String delete(@PathVariable Long id, HttpServletRequest req, HttpSession session, Model model) throws ParseException {
+		log.debug("### delete(" + id + ")");
+		
+		potravinaService.delete(potravinaService.findOne(id));
+		
+		return "redirect:/gre/potravina/seznam";
+	}
+
+	@RequestMapping(value = "/edit")
+	public String edit(FormObject formObject, HttpServletRequest req, HttpSession session, Model model) throws ParseException {
+		log.debug("### edit(" +formObject.getId()+", "+ formObject.getJmeno() + ")");
+		
+		Potravina p = potravinaService.findOne(formObject.getId());
+		p.setJmeno(formObject.getJmeno().isEmpty() ? p.getJmeno() : removeDiacritics(formObject.getJmeno().toUpperCase()));
 		potravinaService.save(p);
-
-		return "redirect:/";
+		
+		return "redirect:/gre/potravina/seznam";
 	}
 
 }

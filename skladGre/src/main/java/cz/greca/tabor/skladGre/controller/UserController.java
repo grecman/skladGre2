@@ -36,7 +36,7 @@ public class UserController {
 		
 		ses.setAttribute("userLogin", "GRECA");
 		ses.setAttribute("userRole", "ADMIN");
-		return "redirect:/gre/td/seznam";
+		return "redirect:/gre/potravina/seznam";
 
 //		List<User> u = userService.findAllByOrderByNickAsc();
 //		model.addAttribute("listUser", u);

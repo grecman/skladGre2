@@ -32,21 +32,21 @@ public class PotravinaService {
 		return potravinaRepository.findAll();
 	}
 
-	public Potravina findOne(int id) {
+	public Potravina findOne(long id) {
 		return potravinaRepository.findOne(id);
 	}
 
-//	public Potravina find(String nazev) {
-//		return potravinaRepository.findOne();
-//	}
+	public void delete(Potravina potravina) {
+		potravinaRepository.delete(potravina);
+	}
 	
-//	public void remove(int itemId) {
-//		potravinaRepository.remove(itemId);
-//	}
-
-//	public void removeAll() {
-//		potravinaRepository.removeAll();
-//	}
+	public void deleteAll() {
+		potravinaRepository.deleteAll();
+	}
+	
+	public Potravina findByJmeno(String nazev) {
+		return potravinaRepository.findByJmeno(nazev);
+	}
 	
 	public Iterable<String> findPotravinaByString(String string) {
 		//log.debug("\t### findPotravinaByString("+string+")");

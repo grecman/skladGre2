@@ -8,40 +8,10 @@
 <head>
 <jsp:include page="lib.jsp" />
 <title>Tabor</title>
-
-<script>
-	$(document).ready(function() {
-
-		$('#tableId').dataTable({
-			"paging" : true,
-			"ordering" : true,
-			//"order" : [ [ 2, "asc" ], [ 0, "asc" ] ],
-			"info" : true,
-			"bFilter" : true,
-			"iDisplayLength" : 10,
-			"language" : {
-				// datatables.net/reference/option/language
-				"lengthMenu" : "&#160;Zobrazit _MENU_ řádků na stránce.",
-				"info" : "&#160;Stránka: _PAGE_/_PAGES_, načteno _TOTAL_ záznamů.",
-				"infoEmpty" : "Nenalezeny žádné záznamy.",
-				"infoFiltered" : "&#160;(filtr: _TOTAL_ / _MAX_)",
-				"loadingRecords" : "Nahrávám...",
-				"processing" : "Pracuji...",
-				"search" : "Vyhledat:",
-				"zeroRecords" : "Nebyly nalezeny žádné záznamy.",
-				"paginate" : {
-					"first" : "První",
-					"last" : "Poslední",
-					"next" : "Další",
-					"previous" : "Předcházející"
-				}
-			}
-		});
-	});
-</script>
 </head>
 <body>
 	<div class="page">
+		<c:set scope="request" var="selectedMenu" value="login" />
 		<jsp:include page="header.jsp" />
 
 		<div class="mainAreaWide">
@@ -108,10 +78,7 @@
 								<td align="left" title="${i.pocetPrihlaseni}...${i.posledniPrihlaseni}">${i.nick}</td>
 								<td align="left">${i.role}</td>
 								<c:if test="${fn:contains(userRole, 'ADMIN')}">
-									<td align="center"><a onClick="return confirm('Fakt chceš odstřelit ${i.nick} ???')"
-										href="${pageContext.servletContext.contextPath}/gre/login/deleteUser/${i.nick}"> <img title="Smazat uživatele!" style="border: 0px;"
-											src="${pageContext.servletContext.contextPath}/resources/ico/zrusit.png" />
-									</a></td>
+
 									<form:form commandName="formObject" action="${pageContext.servletContext.contextPath}/gre/login/changeParamUser">
 										<form:hidden path="nick" value="${i.nick}" />
 										<td align="center"><form:input path="password" type="password" id="password" class="textovePole" cssStyle="width:140px;"
@@ -123,6 +90,10 @@
 												<form:option value="ADMIN">ADMIN</form:option>
 											</form:select></td>
 										<td align="center"><input type="submit" id="formButton" value="OK" onClick="return confirm('Fakt???')"></input></td>
+										<td align="center"><a onClick="return confirm('Fakt chceš odstřelit ${i.nick} ???')"
+											href="${pageContext.servletContext.contextPath}/gre/login/deleteUser/${i.nick}"> <img title="Smazat uživatele!" style="border: 0px;"
+												src="${pageContext.servletContext.contextPath}/resources/ico/zrusit.png" />
+										</a></td>
 									</form:form>
 								</c:if>
 							</tr>

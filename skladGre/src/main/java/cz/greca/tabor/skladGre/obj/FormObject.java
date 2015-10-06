@@ -12,11 +12,11 @@ public class FormObject {
 	
 	private String prvniDen;
 	
-	private String posledniDen;
-	
 	private Integer pocetTaborovychDnu;
 	
 	private Integer norma;
+	
+	private String jmeno;
 	
 	public long getId() {
 		return id;
@@ -58,14 +58,6 @@ public class FormObject {
 		this.prvniDen = prvniDen;
 	}
 
-	public String getPosledniDen() {
-		return posledniDen;
-	}
-
-	public void setPosledniDen(String posledniDen) {
-		this.posledniDen = posledniDen;
-	}
-
 	public Integer getPocetTaborovychDnu() {
 		return pocetTaborovychDnu;
 	}
@@ -81,8 +73,14 @@ public class FormObject {
 	public void setNorma(Integer norma) {
 		this.norma = norma;
 	}
+
+	public String getJmeno() {
+		return jmeno;
+	}
+
+	public void setJmeno(String jmeno) {
+		this.jmeno = jmeno;
+	}
 	
-	
-	
-	
+		
 }

@@ -8,39 +8,10 @@
 <head>
 <jsp:include page="lib.jsp" />
 <title>Tabor</title>
-
-<script>
-	$(document).ready(function() {
-		$('#tableId').dataTable({
-			"paging" : true,
-			"ordering" : true,
-			"order" : [ [ 0, "asc" ], [ 2, "asc" ] ],
-			"info" : true,
-			"bFilter" : true,
-			"iDisplayLength" : 25,
-			"language" : {
-				// datatables.net/reference/option/language
-				"lengthMenu" : "&#160;Zobrazit _MENU_ řádků na stránce.",
-				"info" : "&#160;Stránka: _PAGE_/_PAGES_, načteno _TOTAL_ záznamů.",
-				"infoEmpty" : "Nenalezeny žádné záznamy.",
-				"infoFiltered" : "&#160;(filtr: _TOTAL_ / _MAX_)",
-				"loadingRecords" : "Nahrávám...",
-				"processing" : "Pracuji...",
-				"search" : "Vyhledat:",
-				"zeroRecords" : "Nebyly nalezeny žádné záznamy.",
-				"paginate" : {
-					"first" : "První",
-					"last" : "Poslední",
-					"next" : "Další",
-					"previous" : "Předcházející"
-				}
-			}
-		});
-	});
-</script>
 </head>
 <body>
 	<div class="page">
+		<c:set scope="request" var="selectedMenu" value="td" />
 		<jsp:include page="header.jsp"></jsp:include>
 		<div class="mainAreaWide">
 			<c:if test="${empty listTd and userRole=='ADMIN'}">
@@ -67,7 +38,7 @@
 							<th style="font-size: x-small;">Den</th>
 							<c:if test="${fn:contains(userRole, 'ADMIN')}">
 								<th colspan="3">Admin setting&#160;&#160;<a onClick="return confirm('Fakt chceš odstřelit tento den???')"
-									href="${pageContext.servletContext.contextPath}/gre/td/deleteTdAll"> <img title="Smazat všechny dny!" style="border: 0px;"
+									href="${pageContext.servletContext.contextPath}/gre/td/deleteAll"> <img title="Smazat všechny dny!" style="border: 0px;"
 										src="${pageContext.servletContext.contextPath}/resources/ico/zrusit.png" />
 								</a></th>
 							</c:if>

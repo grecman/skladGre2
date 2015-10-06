@@ -16,7 +16,7 @@
 		<div class="menu">
 			<a class="${selectedMenu eq 'login' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/login/logged">Login</a>
 			<a class="${selectedMenu eq 'td' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/td/seznam">Táborové dny</a>
-			<a class="${selectedMenu eq 'potraviny' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/potravina/potraviny">Potraviny</a>
+			<a class="${selectedMenu eq 'potraviny' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/potravina/seznam">Potraviny</a>
 		</div>
 	</div>
 </jsp:root>
