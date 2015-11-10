@@ -14,7 +14,9 @@ public class Sklad implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SKLAD_ID_GENERATOR")
 	private long id;
 
-	private float cena;
+	private Float cena;
+	
+	private Float mnozstvi;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="datum_prijmu")
@@ -35,6 +37,10 @@ public class Sklad implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_den")
 	private Den den;
+	
+	@ManyToOne
+	@JoinColumn(name="id_mj")
+	private Mj mj;
 
 	public Sklad() {
 	}
@@ -47,12 +53,20 @@ public class Sklad implements Serializable {
 		this.id = id;
 	}
 
-	public float getCena() {
-		return this.cena;
+	public Float getCena() {
+		return cena;
 	}
 
-	public void setCena(float cena) {
+	public void setCena(Float cena) {
 		this.cena = cena;
+	}
+
+	public Float getMnozstvi() {
+		return mnozstvi;
+	}
+
+	public void setMnozstvi(Float mnozstvi) {
+		this.mnozstvi = mnozstvi;
 	}
 
 	public Date getDatumPrijmu() {
@@ -93,6 +107,14 @@ public class Sklad implements Serializable {
 
 	public void setDen(Den den) {
 		this.den = den;
+	}
+
+	public Mj getMj() {
+		return mj;
+	}
+
+	public void setMj(Mj mj) {
+		this.mj = mj;
 	}
 
 

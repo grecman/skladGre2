@@ -19,7 +19,8 @@ public class IndexController {
 		ses.setAttribute("userLogin", "");
 		ses.setAttribute("userRole", "");
 		ses.setAttribute("errorMessage", "");
-
+		ses.setAttribute("vybranyDenId", "");
+				
 		return "redirect:/gre/login/1";
 	}
 	

@@ -13,8 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import cz.greca.tabor.skladGre.entity.Potravina;
 import cz.greca.tabor.skladGre.obj.FormObject;
@@ -42,13 +40,6 @@ public class PotravinaController {
 		model.addAttribute("listPotravina", p);
 
 		return "potraviny";
-	}
-
-	@RequestMapping(headers = "Content-Type=application/json", value = "/autocompleteNazevPotraviny")
-	@ResponseBody
-	public Iterable<String> autocompleteNazevPotraviny(@RequestParam String string) {
-		log.debug("### autocompleteNazevPotraviny:" + string);
-		return potravinaService.findPotravinaByString(string);
 	}
 
 	@RequestMapping(value = "/nova")

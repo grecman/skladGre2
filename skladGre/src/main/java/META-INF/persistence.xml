@@ -2,7 +2,7 @@
 <persistence version="2.1"
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="skladPersistence">
+	<persistence-unit name="skladPersistence" transaction-type="RESOURCE_LOCAL">
 
 		<!-- Hibernatovsky provider pro dataSource (alternativa je tady treba EclipseLink) -->
 		<!-- !!! musi byt uveden pred dataSourcem !!! -->
@@ -11,6 +11,12 @@
 		<!-- dataSource ktery pouzije muj lokalni server, tedy Achape-tomcat. Kompletni 
 			ConnectString je nakonfigurovan v context.xml na lokalnim serveru (tomcat) -->
 		<non-jta-data-source>java:comp/env/jdbc/skladGre</non-jta-data-source>
+		
+		<class>cz.greca.tabor.skladGre.entity.Den</class>
+		<class>cz.greca.tabor.skladGre.entity.Potravina</class>
+		<class>cz.greca.tabor.skladGre.entity.Sklad</class>
+		<class>cz.greca.tabor.skladGre.entity.User</class>
+		<class>cz.greca.tabor.skladGre.entity.Mj</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

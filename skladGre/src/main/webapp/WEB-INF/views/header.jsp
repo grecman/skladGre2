@@ -1,22 +1,24 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:form="http://www.springframework.org/tags/form" xmlns:Spring="http://www.springframework.org/tags"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
-	<div class="logo"><SCRIPT type="text/javascript">/* gre */</SCRIPT>
-		<!-- pri prazdnem tagu v DIVu prohlizece neumeji tento div uzavrit a ignoruji nasledujici /DIV, proto tento vyse vlozeny script -->
-	</div>
-	<div class="header">
-		<div class="title"><a href="${pageContext.servletContext.contextPath}/index.html">TÃ¡borovÃ½ sklad</a> | ${pageTitle}</div>
-		<div class="info">
-			<div class="user">
-				<span id="uzivatel" title="${userRole}">&#160;${userLogin}&#160;</span>
-			</div>
-		</div>
-		 
-		<div class="menu">
-			<a class="${selectedMenu eq 'login' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/login/logged">Login</a>
-			<a class="${selectedMenu eq 'td' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/td/seznam">TÃ¡borovÃ© dny</a>
-			<a class="${selectedMenu eq 'potraviny' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/potravina/seznam">Potraviny</a>
+<div class="logo">
+	<SCRIPT type="text/javascript">
+		/* gre */
+	</SCRIPT>
+	<!-- pri prazdnem tagu v DIVu prohlizece neumeji tento div uzavrit a ignoruji nasledujici /DIV, proto tento vyse vlozeny script -->
+</div>
+<div class="header">
+	<div class="title">Táborový sklad | ${pageTitle}</div>
+	<div class="info">
+		<div class="user">
+			<span id="uzivatel" style="color: blue; font-weight: bold;" title="${userRole}&#160;Odhlásit"><a
+				href="${pageContext.servletContext.contextPath}/index.html">&#160;${userLogin}&#160;</a></span>
 		</div>
 	</div>
-</jsp:root>
+	<div class="menu">
+		<a class="${selectedMenu eq 'login' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/login/logged">Login</a>
+		<a class="${selectedMenu eq 'td' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/td/seznam">Táborové
+			dny</a> <a class="${selectedMenu eq 'potraviny' ? 'selected' : 'passive'}"
+			href="${pageContext.servletContext.contextPath}/gre/potravina/seznam">Potraviny</a> <a
+			class="${selectedMenu eq 'osazenstvo' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/osazenstvo/vyberTyp">Táborové
+			osazenstvo</a> <a class="${selectedMenu eq 'nastaveni' ? 'selected' : 'passive'}"
+			href="${pageContext.servletContext.contextPath}/gre/nastaveni">Nastavení</a>
+	</div>
+</div>

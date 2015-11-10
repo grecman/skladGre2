@@ -20,12 +20,12 @@ import cz.greca.tabor.skladGre.service.UserService;
 
 @Controller
 @RequestMapping("/login")
-public class UserController {
+public class LoginController {
 
 	@Autowired
 	private UserService userService;
 
-	private static final Logger log = Logger.getLogger(UserController.class);
+	private static final Logger log = Logger.getLogger(LoginController.class);
 
 	@RequestMapping(value = "/1")
 	public String loginPage(FormObject formObject, HttpServletRequest req, HttpSession ses, Model model) {
@@ -33,11 +33,11 @@ public class UserController {
 		ses.setAttribute("pageTitle", "Logovací obrazovka");
 		ses.setAttribute("userLogin", "");
 		ses.setAttribute("userRole", "");
+		ses.setAttribute("now", "");
 		
 		ses.setAttribute("userLogin", "GRECA");
 		ses.setAttribute("userRole", "ADMIN");
-		return "redirect:/gre/potravina/seznam";
-
+		return "redirect:/gre/td/seznam";
 //		List<User> u = userService.findAllByOrderByNickAsc();
 //		model.addAttribute("listUser", u);
 //		return "login";

@@ -1,5 +1,7 @@
 package cz.greca.tabor.skladGre.obj;
 
+import java.util.Date;
+
 public class FormObject {
 	
 	private long id;
@@ -17,6 +19,16 @@ public class FormObject {
 	private Integer norma;
 	
 	private String jmeno;
+	
+	private Date den;
+	
+	private String mernaJednotka;
+	
+	private String cena;
+	
+	private String mnozstvi;
+	
+	private Integer uctenka;
 	
 	public long getId() {
 		return id;
@@ -81,6 +93,48 @@ public class FormObject {
 	public void setJmeno(String jmeno) {
 		this.jmeno = jmeno;
 	}
+
+	public Date getDen() {
+		return den;
+	}
+
+	public void setDen(Date den) {
+		this.den = den;
+	}
+
+
+	public String getMernaJednotka() {
+		return mernaJednotka;
+	}
+
+	public void setMernaJednotka(String mernaJednotka) {
+		this.mernaJednotka = mernaJednotka;
+	}
+
+	public String getCena() {
+		return cena;
+	}
+
+	public void setCena(String cena) {
+		this.cena = cena;
+	}
+
+	public String getMnozstvi() {
+		return mnozstvi;
+	}
+
+	public void setMnozstvi(String mnozstvi) {
+		this.mnozstvi = mnozstvi;
+	}
+
+	public Integer getUctenka() {
+		return uctenka;
+	}
+
+	public void setUctenka(Integer uctenka) {
+		this.uctenka = uctenka;
+	}
 	
-		
+	
+
 }

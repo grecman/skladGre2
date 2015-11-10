@@ -1,16 +1,6 @@
 package cz.greca.tabor.skladGre.service;
 
-import java.text.Normalizer;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import cz.greca.tabor.skladGre.entity.Potravina;
-import cz.greca.tabor.skladGre.entity.Den;
-import cz.greca.tabor.skladGre.entity.User;
 
 @Service
 public class InitDbService {

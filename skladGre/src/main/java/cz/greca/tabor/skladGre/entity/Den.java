@@ -19,6 +19,8 @@ public class Den implements Serializable {
 	private Date den;
 
 	private Integer norma;
+	
+	private Integer poradi;
 
 	//bi-directional many-to-one association to Sklad
 	@OneToMany(mappedBy="den")
@@ -58,6 +60,16 @@ public class Den implements Serializable {
 	public void setSklads(Set<Sklad> sklads) {
 		this.sklads = sklads;
 	}
+
+	public Integer getPoradi() {
+		return poradi;
+	}
+
+	public void setPoradi(Integer poradi) {
+		this.poradi = poradi;
+	}
+	
+	
 
 
 }

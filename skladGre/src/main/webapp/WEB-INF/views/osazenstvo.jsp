@@ -12,9 +12,11 @@
 </head>
 <body>
 	<div class="page">
-		<c:set scope="request" var="selectedMenu" value="login" />
+		<c:set scope="request" var="selectedMenu" value="osazenstvo" />
 		<jsp:include page="header.jsp" />
 		<div class="mainAreaWide">
+			<H5>Zamyslet se, jestli v této aplikaci by bylo dobré mít seznam personálu a dětí ...</H5>
+			<!-- 
 			<c:if test="${empty listUser or userRole=='ADMIN'}">
 				<H3>Registrace nového uživatele</H3>
 				<div class="formBar">
@@ -47,15 +49,16 @@
 								</c:forEach>
 							</form:select>
 						</SPAN>
-						<SPAN> <form:input path="password" id="password" type="password" class="textovePole" cssStyle="width:160px;"></form:input> <input
-							type="submit" id="formButton" value="OK" class="heroBtn" style="display: inline; margin-left: 25px;"></input>
+						<SPAN> <form:input path="password" id="password" type="password" class="textovePole" cssStyle="width:160px;"></form:input> <input type="submit"
+							id="formButton" value="OK" class="heroBtn" style="display: inline; margin-left: 25px;"></input>
 						</SPAN>
 					</form:form>
 				</div>
 			</c:if>
+
 			<c:if test="${not empty listUser}">
 				<H3>Seznam registrovaných uživatelů</H3>
-				<table style="table-layout: fixed;">
+				<table id="XXXtableId" style="table-layout: fixed;">
 					<col width="95px" />
 					<col width="80px" />
 					<col width="10px" />
@@ -77,6 +80,7 @@
 								<td align="left" title="${i.pocetPrihlaseni}...${i.posledniPrihlaseni}">${i.nick}</td>
 								<td align="left">${i.role}</td>
 								<c:if test="${fn:contains(userRole, 'ADMIN')}">
+
 									<form:form commandName="formObject" action="${pageContext.servletContext.contextPath}/gre/login/changeParamUser">
 										<form:hidden path="nick" value="${i.nick}" />
 										<td align="center"><form:input path="password" type="password" id="password" class="textovePole" cssStyle="width:140px;"
@@ -89,8 +93,8 @@
 											</form:select></td>
 										<td align="center"><input type="submit" id="formButton" value="OK" onClick="return confirm('Fakt???')"></input></td>
 										<td align="center"><a onClick="return confirm('Fakt chceš odstřelit ${i.nick} ???')"
-											href="${pageContext.servletContext.contextPath}/gre/login/deleteUser/${i.nick}"> <img title="Smazat uživatele!"
-												style="border: 0px;" src="${pageContext.servletContext.contextPath}/resources/ico/zrusit.png" />
+											href="${pageContext.servletContext.contextPath}/gre/login/deleteUser/${i.nick}"> <img title="Smazat uživatele!" style="border: 0px;"
+												src="${pageContext.servletContext.contextPath}/resources/ico/zrusit.png" />
 										</a></td>
 									</form:form>
 								</c:if>
@@ -99,14 +103,8 @@
 					</tbody>
 				</table>
 			</c:if>
-		</div>
-		<H2 style="color: red; padding-left: 20px;">${errorMessage}</H2>
-		<!-- 
-		<BR /> <a href="${pageContext.servletContext.contextPath}/potraviny"
-			class="btn" title="Seznam všech zadaných potravin">Potraviny</a> <BR /><BR /><BR /><BR />
-		<a href="${pageContext.servletContext.contextPath}/potravina/nova"
-			class="btn" title="Nová potravina">Nová potravina</a>
  -->
+		</div>
 		<div class="pageFooter">
 			<jsp:include page="footerInfo.jsp" />
 		</div>
