@@ -1,8 +1,13 @@
 package cz.greca.tabor.skladGre.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="potravina", schema="tabor")
@@ -15,10 +20,6 @@ public class Potravina implements Serializable {
 	private long id;
 
 	private String jmeno;
-
-	//bi-directional many-to-one association to Sklad
-	@OneToMany(mappedBy="potravina")
-	private Set<Sklad> sklads;
 
 	public Potravina() {
 	}
@@ -37,28 +38,6 @@ public class Potravina implements Serializable {
 
 	public void setJmeno(String jmeno) {
 		this.jmeno = jmeno;
-	}
-
-	public Set<Sklad> getSklads() {
-		return this.sklads;
-	}
-
-	public void setSklads(Set<Sklad> sklads) {
-		this.sklads = sklads;
-	}
-
-	public Sklad addSklad(Sklad sklad) {
-		getSklads().add(sklad);
-		sklad.setPotravina(this);
-
-		return sklad;
-	}
-
-	public Sklad removeSklad(Sklad sklad) {
-		getSklads().remove(sklad);
-		sklad.setPotravina(null);
-
-		return sklad;
 	}
 
 }

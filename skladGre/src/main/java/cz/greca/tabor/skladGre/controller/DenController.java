@@ -142,16 +142,14 @@ public class DenController {
 				+ formObject.getMernaJednotka() + ", " + formObject.getUctenka() + ")");
 				
 		Den d = denService.findOne(denId);
-		Mj mj = mjService.findOneByMernaJednotka(formObject.getMernaJednotka());
-		Potravina p = potravinaService.findByJmeno(formObject.getJmeno());
 		
 		Sklad s = new Sklad();
 		s.setCena(Float.valueOf(formObject.getCena().replace(",", ".")));
 		s.setMnozstvi(Float.valueOf(formObject.getMnozstvi().replace(",", ".")));
 		s.setDatumPrijmu(new Date());
-		s.setMj(mj);
+		s.setMernaJednotka(formObject.getMernaJednotka());
 		s.setDen(d);
-		s.setPotravina(p);
+		s.setJmenoPotraviny(formObject.getJmeno());
 		s.setUctenka(formObject.getUctenka());
 		skladService.save(s);
 		

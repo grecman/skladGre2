@@ -1,8 +1,19 @@
 package cz.greca.tabor.skladGre.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="user", schema="tabor")
@@ -24,9 +35,13 @@ public class User implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="posledni_prihlaseni")
 	private Date posledniPrihlaseni;
-
-	private String role;
-
+	
+	@Column(name="super_admin")
+	private Boolean superAdmin;
+		
+	@OneToMany(mappedBy="user")
+	private Set<Tabor> tabors;
+	
 	public User() {
 	}
 
@@ -70,12 +85,22 @@ public class User implements Serializable {
 		this.posledniPrihlaseni = posledniPrihlaseni;
 	}
 
-	public String getRole() {
-		return this.role;
+	public Set<Tabor> getTabors() {
+		return tabors;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setTabors(Set<Tabor> tabors) {
+		this.tabors = tabors;
 	}
+
+	public Boolean getSuperAdmin() {
+		return superAdmin;
+	}
+
+	public void setSuperAdmin(Boolean superAdmin) {
+		this.superAdmin = superAdmin;
+	}
+
+
 
 }

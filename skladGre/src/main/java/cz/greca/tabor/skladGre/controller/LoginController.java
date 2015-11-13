@@ -21,12 +21,12 @@ import cz.greca.tabor.skladGre.service.UserService;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-
+	
 	@Autowired
 	private UserService userService;
-
+	
 	private static final Logger log = Logger.getLogger(LoginController.class);
-
+	
 	@RequestMapping(value = "/1")
 	public String loginPage(FormObject formObject, HttpServletRequest req, HttpSession ses, Model model) {
 		log.debug("###\t loginPage()");
@@ -35,52 +35,59 @@ public class LoginController {
 		ses.setAttribute("userRole", "");
 		ses.setAttribute("now", "");
 		
-		ses.setAttribute("userLogin", "GRECA");
-		ses.setAttribute("userRole", "ADMIN");
-		return "redirect:/gre/td/seznam";
-//		List<User> u = userService.findAllByOrderByNickAsc();
-//		model.addAttribute("listUser", u);
-//		return "login";
+		// ses.setAttribute("userLogin", "GRECA");
+		// ses.setAttribute("userRole", "ADMIN");
+		// return "redirect:/gre/td/seznam";
+		
+		// if (adminService.findAll().isEmpty()) {
+		// ses.setAttribute("errorMessage", "Neexistuje ADMIN! Je třeba se obrátit na tvůrce aplikace a následně provést základní nastavení aplikace.");
+		// return "redirect:/gre/errorPage";
+		// }
+		
+		List<User> u = userService.findAllByOrderByNickAsc();
+		model.addAttribute("listUser", u);
+		
+		return "login";
 	}
-
+	
 	@RequestMapping(value = "/logged")
 	public String loggedUser(FormObject formObject, HttpServletRequest req, HttpSession ses, Model model) {
-		log.debug("###\t loggedUser(" + ses.getAttribute("userLogin") + " - " + ses.getAttribute("userRole") + ")");
+		log.debug("###\t loggedUser(" + ses.getAttribute("userLogin") + ")");
 		ses.setAttribute("pageTitle", "Logovací obrazovka (uživatel přihlášen)");
-
+		
 		if (ses.getAttribute("userLogin") == null) {
 			ses.setAttribute("errorMessage", "Uživatel není přihlášen.");
 			return "redirect:/gre/login/1";
 		} else {
 			// ses.setAttribute("errorMessage", "");
+			User user = userService.findByNick(ses.getAttribute("userLogin").toString());
+			model.addAttribute("loggedUser", user);
 			List<User> u = userService.findAllByOrderByNickAsc();
 			model.addAttribute("listUser", u);
 			return "login";
 		}
 	}
-
+	
 	@RequestMapping(value = "/newUser")
 	public String newUser(FormObject formObject, HttpServletRequest req, HttpSession ses, Model model) throws ParseException {
-		log.debug("###\t newUser(" + formObject.getNick().toUpperCase() + ", " + formObject.getRole() + ", " + formObject.getPassword() + ")");
-
+		log.debug("###\t newUser(" + formObject.getNick().toUpperCase() + ", " + formObject.getPassword() + ", " + formObject.getSuperAdmin() + ")");
+		
 		List<User> allU = userService.findAll();
-		User u = userService.findbyNick(formObject.getNick().toUpperCase());
-
-		if (formObject.getRole().isEmpty() || formObject.getPassword().isEmpty()) {
-			ses.setAttribute("errorMessage", "Heslo nebo role nebyla vyplněna!");
+		User u = userService.findByNick(formObject.getNick().toUpperCase());
+		
+		if (formObject.getNick().isEmpty() || formObject.getPassword().isEmpty()) {
+			ses.setAttribute("errorMessage", "Chyba zadání!");
 			return "redirect:/gre/errorPage";
 		}
-
+		
 		if (u == null) {
 			User newUser = new User();
 			newUser.setNick(formObject.getNick().toUpperCase());
 			if (allU == null || allU.isEmpty()) {
-			// prvni uzivatel musi byt vzdy admin!
-			newUser.setRole("ADMIN");
-			} else if (formObject.getRole() == null || formObject.getRole().isEmpty()) {
-			newUser.setRole(formObject.getRole().toUpperCase());
+				// prvni uzivatel musi byt vzdy admin!
+				newUser.setSuperAdmin(true);
 			} else {
-			newUser.setRole(formObject.getRole().toUpperCase());
+				newUser.setSuperAdmin(formObject.getSuperAdmin());
 			}
 			newUser.setPassword(formObject.getPassword());
 			newUser.setPocetPrihlaseni(1);
@@ -92,14 +99,13 @@ public class LoginController {
 		}
 		return "redirect:/gre/login/logged";
 	}
-
+	
 	@RequestMapping(value = "/enterLogin")
 	public String enterPwd(FormObject formObject, HttpServletRequest req, HttpSession ses, Model model) throws ParseException {
 		log.debug("###\t enterPwd(" + formObject.getNick().toUpperCase() + ", " + formObject.getPassword() + ")");
-		User u = userService.findbyNick(formObject.getNick().toUpperCase());
+		User u = userService.findByNick(formObject.getNick().toUpperCase());
 		if (u != null && u.getPassword().startsWith(formObject.getPassword()) && u.getPassword().length() == formObject.getPassword().length()) {
 			ses.setAttribute("userLogin", u.getNick());
-			ses.setAttribute("userRole", u.getRole());
 			ses.setAttribute("errorMessage", "");
 			u.setPocetPrihlaseni(u.getPocetPrihlaseni() + 1);
 			u.setPosledniPrihlaseni(new Date());
@@ -111,46 +117,69 @@ public class LoginController {
 			return "redirect:/gre/login/1";
 		}
 	}
-
+	
 	@RequestMapping(value = "/deleteUser/{nick}")
 	public String deleteUser(@PathVariable String nick, HttpServletRequest req, HttpSession ses, Model model) {
 		log.debug("###\t deleteUser(" + nick + ")");
-
-		User u = userService.findbyNick(nick);
 		
-		if (u.getRole().startsWith("ADMIN")) {
-			List<User> ul = userService.findNickByRole("ADMIN");
-
-			if (ul.size() <= 1) {
-			ses.setAttribute("errorMessage", "Snažite se smazat posledního ADMINa v aplikaci! Což nelze.");
-			return "redirect:/gre/errorPage";
+		User u = userService.findByNick(nick);
+		
+		if (u.getSuperAdmin()) {
+			int pocetSuperAdminu = 0;
+			for (User users : userService.findAll()) {
+				if (users.getSuperAdmin())
+					pocetSuperAdminu++;
+			}
+			if (pocetSuperAdminu <= 1) {
+				ses.setAttribute("errorMessage", "Snažite se smazat posledního superAdmina v aplikaci! Což nelze.");
+				return "redirect:/gre/errorPage";
 			}
 		}
-
-		userService.delete(userService.findbyNick(nick));
+		
+		userService.delete(userService.findByNick(nick));
 		return "redirect:/gre/login/logged";
 	}
-
+	
 	@RequestMapping(value = "/changeParamUser")
 	public String changeParamUser(FormObject formObject, HttpServletRequest req, HttpSession ses, Model model) {
-		log.debug("###\t changeParamUser(" + formObject.getNick() + ", " + formObject.getRole() + ", " + formObject.getPassword() + ")");
-
-		User u = userService.findbyNick(formObject.getNick());
+		log.debug("###\t changeParamUser(" + formObject.getId() + ", " + formObject.getNick() + ", " + formObject.getSuperAdmin() + ", "
+				+ formObject.getPassword() + ")");
+				
+		User u = userService.findOne(formObject.getId());
 		
-		if (u.getRole().startsWith("ADMIN") && !formObject.getRole().startsWith("ADMIN")) {
-			List<User> ul = userService.findNickByRole("ADMIN");
-
-			if (ul.size() <= 1) {
-			ses.setAttribute("errorMessage", "Snažite se zrušit posledního ADMINa v aplikaci! Což nelze.");
-			return "redirect:/gre/errorPage";
+		if (u.getSuperAdmin() && !formObject.getSuperAdmin()) {
+			
+			int pocetSuperAdminu = 0;
+			for (User users : userService.findAll()) {
+				if (users.getSuperAdmin())
+					pocetSuperAdminu++;
+			}
+			
+			if (pocetSuperAdminu <= 1) {
+				ses.setAttribute("errorMessage", "Snažite se smazat posledního superAdmina v aplikaci! Což nelze.");
+				return "redirect:/gre/errorPage";
 			}
 		}
-
+		
+		if (!formObject.getNick().isEmpty() && userService.findByNick(formObject.getNick()) != null) {
+			ses.setAttribute("errorMessage", "Změnu nicku nelze provést, uživatel již existuje!");
+			return "redirect:/gre/errorPage";
+		}
+		
+		u.setNick(formObject.getNick().isEmpty() ? u.getNick() : formObject.getNick().toUpperCase());
 		u.setPassword(formObject.getPassword().isEmpty() ? u.getPassword() : formObject.getPassword());
-		u.setRole(formObject.getRole());
+		u.setSuperAdmin(formObject.getSuperAdmin());
 		userService.save(u);
-
-		return "redirect:/gre/login/logged";
+						
+		if (!ses.getAttribute("userLogin").toString().startsWith(u.getNick()) && ses.getAttribute("userLogin").toString().length() == u.getNick().length()
+				&& !formObject.getPassword().isEmpty()) {
+			log.debug("###\t ... bylo zmeneno heslo, odhlasuji se!");
+			return "redirect:/gre/login/1";
+		} else {
+			ses.setAttribute("userLogin", formObject.getNick().isEmpty() ? u.getNick() : formObject.getNick().toUpperCase());
+			return "redirect:/gre/login/logged";
+		}
+		
 	}
-
+	
 }

@@ -15,11 +15,9 @@
 		<c:set scope="request" var="selectedMenu" value="nastaveni" />
 		<jsp:include page="header.jsp" />
 		<div class="mainAreaWide">
-			<SPAN>
-				<H5>Zadat celkovy pocet lidi na tabore (nebo ho spocitat v pripade, ze bude zadano komplet taborove osazenstvo), dale financni
-					normu na jednoho jedince na den (tusim, ze ted to bylo 110,-) a z toho pocitat normu na den (viz paramert u taborovych dnu, ktery nyni
-					zadavam jako konstantu).</H5>
-			</SPAN>
+			<h5>Zadat celkovy pocet lidi na tabore (nebo ho spocitat v pripade, ze bude zadano komplet taborove osazenstvo), dale financni normu
+				na jednoho jedince na den (tusim, ze ted to bylo 110,-) a z toho pocitat normu na den (viz paramert u taborovych dnu, ktery nyni zadavam
+				jako konstantu).</h5>
 			<H3>Číselník měrných jednotek</H3>
 			<table style="table-layout: fixed;">
 				<col width="70px" />

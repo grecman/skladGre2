@@ -46,25 +46,14 @@ public class UserService {
 		return userRepository.findOne(id);
 	}
 	
-	public User findbyNick(String nick) {
+	public User findByNick(String nick) {
 		log.debug("###\t findbyNick("+nick+ ")");
 		return userRepository.findByNick(nick);
 	}
 	
-	public List<User> findNickByRole(String role){
-		log.debug("###\t findNickByRole("+role+ ")");
-		return userRepository.findNickByRole(role);
-	}
-	
 //	public List<User> findNickByRole(String role){
-//		List<User> gre;
 //		log.debug("###\t findNickByRole("+role+ ")");
-//		try {
-//			gre = entityManager.createQuery("SELECT g FROM User g WHERE g.role=:role ", User.class).setParameter("role", role).getResultList();
-//		} catch (NoResultException e) {
-//			return null;
-//		}
-//		return gre;
+//		return userRepository.findNickByRole(role);
 //	}
-
+	
 }

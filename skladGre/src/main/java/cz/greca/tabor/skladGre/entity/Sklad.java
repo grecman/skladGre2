@@ -27,21 +27,18 @@ public class Sklad implements Serializable {
 	private Date datumVydeje;
 
 	private Integer uctenka;
-
-	//bi-directional many-to-one association to Potravina
-	@ManyToOne
-	@JoinColumn(name="id_potravina")
-	private Potravina potravina;
+	
+	@Column(name="jmeno_potraviny")
+	private String jmenoPotraviny;
+	
+	@Column(name="merna_jednotka")
+	private String mernaJednotka;
 
 	//bi-directional many-to-one association to TaborovyDen
 	@ManyToOne
 	@JoinColumn(name="id_den")
 	private Den den;
 	
-	@ManyToOne
-	@JoinColumn(name="id_mj")
-	private Mj mj;
-
 	public Sklad() {
 	}
 
@@ -93,14 +90,6 @@ public class Sklad implements Serializable {
 		this.uctenka = uctenka;
 	}
 
-	public Potravina getPotravina() {
-		return this.potravina;
-	}
-
-	public void setPotravina(Potravina potravina) {
-		this.potravina = potravina;
-	}
-
 	public Den getDen() {
 		return den;
 	}
@@ -109,12 +98,20 @@ public class Sklad implements Serializable {
 		this.den = den;
 	}
 
-	public Mj getMj() {
-		return mj;
+	public String getJmenoPotraviny() {
+		return jmenoPotraviny;
 	}
 
-	public void setMj(Mj mj) {
-		this.mj = mj;
+	public void setJmenoPotraviny(String jmenoPotraviny) {
+		this.jmenoPotraviny = jmenoPotraviny;
+	}
+
+	public String getMernaJednotka() {
+		return mernaJednotka;
+	}
+
+	public void setMernaJednotka(String mernaJednotka) {
+		this.mernaJednotka = mernaJednotka;
 	}
 
 

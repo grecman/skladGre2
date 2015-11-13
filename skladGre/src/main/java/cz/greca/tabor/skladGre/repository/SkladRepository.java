@@ -13,7 +13,7 @@ public interface SkladRepository extends JpaRepository<Sklad, Long> {
 	@Query("SELECT g FROM Sklad g WHERE rownum()=1 ORDER BY g.uctenka DESC")
 	Sklad findMaxUctenka();
 
-	@Query("SELECT g FROM Sklad g WHERE g.den.den = ?1 ORDER BY g.potravina.jmeno Asc")
+	@Query("SELECT g FROM Sklad g WHERE g.den.den = ?1 ORDER BY g.jmenoPotraviny Asc")
 	List<Sklad> findByDayOrderByJmenoAsc(Date den);
 	
 	@Query("SELECT g FROM Sklad g WHERE g.den.den = ?1 ORDER BY g.uctenka Asc")

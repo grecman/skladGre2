@@ -1,9 +1,14 @@
 package cz.greca.tabor.skladGre.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity 
 @Table(name="mj", schema="tabor")
@@ -20,9 +25,6 @@ public class Mj implements Serializable {
 
 	private String popis;
 	
-	@OneToMany(mappedBy="mj")
-	private Set<Sklad> sklads;
-
 	public Mj() {
 	}
 
@@ -48,14 +50,6 @@ public class Mj implements Serializable {
 
 	public void setPopis(String popis) {
 		this.popis = popis;
-	}
-
-	public Set<Sklad> getSklads() {
-		return sklads;
-	}
-
-	public void setSklads(Set<Sklad> sklads) {
-		this.sklads = sklads;
 	}
 
 }

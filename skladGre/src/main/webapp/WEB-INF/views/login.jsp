@@ -15,7 +15,7 @@
 		<c:set scope="request" var="selectedMenu" value="login" />
 		<jsp:include page="header.jsp" />
 		<div class="mainAreaWide">
-			<c:if test="${empty listUser or userRole=='ADMIN'}">
+			<c:if test="${empty listUser or loggedUser.superAdmin}">
 				<H3>Registrace nového uživatele</H3>
 				<div class="formBar">
 					<form:form commandName="formObject" action="${pageContext.servletContext.contextPath}/gre/login/newUser">
@@ -25,18 +25,20 @@
 						<SPAN>Password:</SPAN>
 						<SPAN> <form:input path="password" id="password" type="password" class="textovePole" cssStyle="width:160px;"></form:input>
 						</SPAN>
-						<SPAN>Role:</SPAN>
-						<SPAN> <form:select path="role">
-								<form:option value="READER">READER</form:option>
+						<SPAN>Admin:</SPAN>
+						<SPAN><form:checkbox path="superAdmin" cssStyle="width:20px; height: 20px;" /></SPAN>
+						<!-- <SPAN>Role:</SPAN>
+						<SPAN>Role:</SPAN> <form:select path="role">
 								<form:option value="USER">USER</form:option>
+								<form:option value="READER">READER</form:option>
 								<form:option value="ADMIN">ADMIN</form:option>
 							</form:select>
-						</SPAN>
+						</SPAN> -->
 						<SPAN><input type="submit" id="formButton" value="OK" class="heroBtn" style="display: inline; margin-left: 25px;"></input></SPAN>
 					</form:form>
 				</div>
 			</c:if>
-			<c:if test="${not empty listUser and empty userLogin}">
+			<c:if test="${not empty listUser and empty loggedUser}">
 				<H3>Přihlášení uživatele</H3>
 				<div class="formBar">
 					<form:form commandName="formObject" action="${pageContext.servletContext.contextPath}/gre/login/enterLogin">
@@ -55,48 +57,67 @@
 			</c:if>
 			<c:if test="${not empty listUser}">
 				<H3>Seznam registrovaných uživatelů</H3>
-				<table style="table-layout: fixed;">
-					<col width="95px" />
-					<col width="80px" />
-					<col width="10px" />
-					<col width="10px" />
-					<col width="10px" />
-					<col width="10px" />
-					<thead>
-						<tr style="background-color: #dfe0e0;">
-							<th style="font-size: x-small;">Uživatel</th>
-							<th style="font-size: x-small;">Role</th>
-							<c:if test="${fn:contains(userRole, 'ADMIN')}">
-								<th colspan="4">Admin setting</th>
-							</c:if>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${listUser}" var="i">
-							<tr style="background-color: white;">
-								<td align="left" title="${i.pocetPrihlaseni}...${i.posledniPrihlaseni}">${i.nick}</td>
-								<td align="left">${i.role}</td>
-								<c:if test="${fn:contains(userRole, 'ADMIN')}">
-									<form:form commandName="formObject" action="${pageContext.servletContext.contextPath}/gre/login/changeParamUser">
-										<form:hidden path="nick" value="${i.nick}" />
-										<td align="center"><form:input path="password" type="password" id="password" class="textovePole" cssStyle="width:140px;"
-												title="Zadej nove heslo (pův.: ${i.password})"></form:input></td>
-										<td align="center"><form:select path="role">
-												<form:option value="${i.role}">${i.role}</form:option>
-												<form:option value="READER">READER</form:option>
-												<form:option value="USER">USER</form:option>
-												<form:option value="ADMIN">ADMIN</form:option>
-											</form:select></td>
-										<td align="center"><input type="submit" id="formButton" value="OK" onClick="return confirm('Fakt???')"></input></td>
-										<td align="center"><a onClick="return confirm('Fakt chceš odstřelit ${i.nick} ???')"
-											href="${pageContext.servletContext.contextPath}/gre/login/deleteUser/${i.nick}"> <img title="Smazat uživatele!"
-												style="border: 0px;" src="${pageContext.servletContext.contextPath}/resources/ico/zrusit.png" />
-										</a></td>
-									</form:form>
-								</c:if>
-							</tr>
-						</c:forEach>
-					</tbody>
+				<table style="border: none;">
+					<tr>
+						<td valign="top"><table style="table-layout: fixed;">
+								<col width="150px" />
+								<col width="35px" />
+								<thead>
+									<tr style="background-color: #dfe0e0;">
+										<th style="font-size: x-small;">Uživatel</th>
+										<th style="font-size: x-small;" title="Správce aplikace">Adm.</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${listUser}" var="i">
+										<tr style="background-color: white; height: 23px;">
+											<td align="left" title="${i.pocetPrihlaseni}...${i.posledniPrihlaseni}">${i.nick}</td>
+											<td><c:choose>
+													<c:when test="${i.superAdmin}">
+														<img style="border: 0px;" src="${pageContext.servletContext.contextPath}/resources/ico/ok.png" />
+													</c:when>
+													<c:otherwise></c:otherwise>
+												</c:choose></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table></td>
+						<td valign="top"><c:if test="${loggedUser.superAdmin}">
+								<table style="table-layout: fixed;">
+									<col width="300px" />
+									<thead>
+										<tr style="background-color: #dfe0e0;">
+											<th style="font-size: x-small;">Admin settings</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${listUser}" var="i">
+											<tr style="background-color: white;">
+												<form:form commandName="formObject" action="${pageContext.servletContext.contextPath}/gre/login/changeParamUser">
+													<form:hidden path="id" value="${i.id}" />
+													<td align="left"><form:input path="nick" class="textovePole" title="Zadej novy NICK."
+															cssStyle="width:100px; border-style: solid; border-width: thin; border-color: yellow;"></form:input> <form:input
+															path="password" type="password" id="password" class="textovePole"
+															cssStyle="width:100px;border-style: solid; border-width: thin; border-color: yellow;"
+															title="Zadej nove heslo (pův.: ${i.password})"></form:input> <c:choose>
+															<c:when test="${i.superAdmin}">
+																<form:checkbox path="superAdmin" value="${i.superAdmin}" checked="yes" />
+															</c:when>
+															<c:otherwise>
+																<form:checkbox path="superAdmin" value="${i.superAdmin}" />
+															</c:otherwise>
+														</c:choose> <input type="submit" value="OK" onClick="return confirm('Fakt???')"></input> <a
+														onClick="return confirm('Fakt chceš odstřelit uživatele ${i.nick} ???')"
+														href="${pageContext.servletContext.contextPath}/gre/login/deleteUser/${i.nick}"> <img title="Smazat uživatele!"
+															style="border: 0px;" src="${pageContext.servletContext.contextPath}/resources/ico/zrusit.png" />
+													</a></td>
+												</form:form>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</c:if></td>
+					</tr>
 				</table>
 			</c:if>
 		</div>
@@ -106,6 +127,12 @@
 			class="btn" title="Seznam všech zadaných potravin">Potraviny</a> <BR /><BR /><BR /><BR />
 		<a href="${pageContext.servletContext.contextPath}/potravina/nova"
 			class="btn" title="Nová potravina">Nová potravina</a>
+			
+<%-- 			<form:select path="role"> --%> <%-- 												<form:option value="${i.role}">${i.role}</form:option> --%>
+			<%-- 		<form:option value="READER">READER</form:option> --%> <%-- 												<form:option value="USER">USER</form:option> --%>
+			<%-- 	form:option value="ADMIN">ADMIN</form:option> --%> <%-- 											</form:select>  --%></td>
+			
+			
  -->
 		<div class="pageFooter">
 			<jsp:include page="footerInfo.jsp" />

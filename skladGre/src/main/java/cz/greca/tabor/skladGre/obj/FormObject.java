@@ -30,6 +30,8 @@ public class FormObject {
 	
 	private Integer uctenka;
 	
+	private Boolean superAdmin;
+	
 	public long getId() {
 		return id;
 	}
@@ -134,7 +136,14 @@ public class FormObject {
 	public void setUctenka(Integer uctenka) {
 		this.uctenka = uctenka;
 	}
-	
-	
 
+	public Boolean getSuperAdmin() {
+		return superAdmin;
+	}
+
+	public void setSuperAdmin(Boolean superAdmin) {
+		this.superAdmin = superAdmin;
+	}
+	
+	
 }

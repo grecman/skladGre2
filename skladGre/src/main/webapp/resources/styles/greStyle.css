@@ -74,7 +74,7 @@ form {
 	background: inherit;
 }
 
-input, select {
+input, select, checkbox {
 	border-color: white;
 	border-style: solid;
 	border-width: thin;
@@ -151,6 +151,10 @@ input, select {
 .formBar input {
 	float: left;
 	margin-top: -2px;
+}
+
+.formBar checkbox {
+	margin-top: -5px;
 }
 
 .heroBtn {

@@ -11,12 +11,13 @@
 		<!-- dataSource ktery pouzije muj lokalni server, tedy Achape-tomcat. Kompletni 
 			ConnectString je nakonfigurovan v context.xml na lokalnim serveru (tomcat) -->
 		<non-jta-data-source>java:comp/env/jdbc/skladGre</non-jta-data-source>
-		
 		<class>cz.greca.tabor.skladGre.entity.Den</class>
+		<class>cz.greca.tabor.skladGre.entity.Mj</class>
 		<class>cz.greca.tabor.skladGre.entity.Potravina</class>
 		<class>cz.greca.tabor.skladGre.entity.Sklad</class>
+		<class>cz.greca.tabor.skladGre.entity.Tabor</class>
 		<class>cz.greca.tabor.skladGre.entity.User</class>
-		<class>cz.greca.tabor.skladGre.entity.Mj</class>
+		<class>cz.greca.tabor.skladGre.entity.Role</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

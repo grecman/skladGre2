@@ -22,9 +22,12 @@ public class Den implements Serializable {
 	
 	private Integer poradi;
 
-	//bi-directional many-to-one association to Sklad
 	@OneToMany(mappedBy="den")
 	private Set<Sklad> sklads;
+	
+	@ManyToOne
+	@JoinColumn(name="id_tabor")
+	private Tabor tabor;
 
 	public Den() {
 	}

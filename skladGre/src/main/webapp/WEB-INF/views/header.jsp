@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="logo">
 	<SCRIPT type="text/javascript">
 		/* gre */
@@ -14,11 +15,13 @@
 	</div>
 	<div class="menu">
 		<a class="${selectedMenu eq 'login' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/login/logged">Login</a>
-		<a class="${selectedMenu eq 'td' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/td/seznam">Táborové
-			dny</a> <a class="${selectedMenu eq 'potraviny' ? 'selected' : 'passive'}"
-			href="${pageContext.servletContext.contextPath}/gre/potravina/seznam">Potraviny</a> <a
-			class="${selectedMenu eq 'osazenstvo' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/osazenstvo/vyberTyp">Táborové
-			osazenstvo</a> <a class="${selectedMenu eq 'nastaveni' ? 'selected' : 'passive'}"
-			href="${pageContext.servletContext.contextPath}/gre/nastaveni">Nastavení</a>
+		<c:if test="${not empty userLogin}">
+			<a class="${selectedMenu eq 'td' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/td/seznam">Táborové
+				dny</a>
+			<a class="${selectedMenu eq 'potraviny' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/potravina/seznam">Potraviny</a>
+			<a class="${selectedMenu eq 'osazenstvo' ? 'selected' : 'passive'}"
+				href="${pageContext.servletContext.contextPath}/gre/osazenstvo/vyberTyp">Táborové osazenstvo</a>
+			<a class="${selectedMenu eq 'nastaveni' ? 'selected' : 'passive'}" href="${pageContext.servletContext.contextPath}/gre/nastaveni">Nastavení</a>
+		</c:if>
 	</div>
 </div>
