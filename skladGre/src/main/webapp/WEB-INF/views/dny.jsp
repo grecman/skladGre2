@@ -187,7 +187,7 @@
 						<tr style="background-color: #dfe0e0;">
 							<th style="font-size: x-small;">Jmeno</th>
 							<th style="font-size: x-small;">Cena</th>
-							<th style="font-size: x-small;">Mnoství</th>
+							<th style="font-size: x-small;">Množství</th>
 							<th style="font-size: x-small;" title="Měrná jednotka">MJ</th>
 							<th style="font-size: x-small;" title="Číslo účtenky">Č.účt.</th>
 							<th></th>
@@ -196,7 +196,7 @@
 					<tbody>
 						<c:forEach items="${skladDenList}" var="i">
 							<tr style="background-color: white;">
-								<td align="left">${i.potravina.jmeno}</td>
+								<td align="left">${i.jmenoPotraviny}</td>
 								<td align="right">${i.cena}</td>
 								<td align="right">${i.mnozstvi}</td>
 								<td align="center">${i.mj.mernaJednotka}</td>
