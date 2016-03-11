@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cz.greca.tabor.skladGre.entity.Den;
 import cz.greca.tabor.skladGre.entity.Mj;
-import cz.greca.tabor.skladGre.entity.Potravina;
 import cz.greca.tabor.skladGre.entity.Sklad;
 import cz.greca.tabor.skladGre.obj.FormObject;
 import cz.greca.tabor.skladGre.service.DenService;

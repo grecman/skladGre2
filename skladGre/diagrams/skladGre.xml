@@ -15,7 +15,7 @@
 		<entity-width>148</entity-width>
 		<entity-height>266</entity-height>
 		<entity-X-Coordinate>253</entity-X-Coordinate>
-		<entity-Y-Coordinate>264</entity-Y-Coordinate>
+		<entity-Y-Coordinate>268</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -24,7 +24,7 @@
 	<entity>
 		<entity-name>cz.greca.tabor.skladGre.entity.User</entity-name>
 		<entity-width>148</entity-width>
-		<entity-height>206</entity-height>
+		<entity-height>226</entity-height>
 		<entity-X-Coordinate>253</entity-X-Coordinate>
 		<entity-Y-Coordinate>20</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
@@ -37,7 +37,7 @@
 		<entity-width>120</entity-width>
 		<entity-height>206</entity-height>
 		<entity-X-Coordinate>50</entity-X-Coordinate>
-		<entity-Y-Coordinate>294</entity-Y-Coordinate>
+		<entity-Y-Coordinate>330</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -60,6 +60,17 @@
 		<entity-height>128</entity-height>
 		<entity-X-Coordinate>440</entity-X-Coordinate>
 		<entity-Y-Coordinate>396</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>cz.greca.tabor.skladGre.entity.Role</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>108</entity-height>
+		<entity-X-Coordinate>440</entity-X-Coordinate>
+		<entity-Y-Coordinate>20</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>

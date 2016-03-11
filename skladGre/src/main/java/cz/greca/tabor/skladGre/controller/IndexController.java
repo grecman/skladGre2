@@ -15,6 +15,7 @@ public class IndexController {
 
 	@RequestMapping(value = "/index.html")
 	public String index(HttpServletRequest req, HttpSession ses) {
+		
 		log.debug("###\t index()");
 		ses.setAttribute("userLogin", "");
 		ses.setAttribute("userRole", "");

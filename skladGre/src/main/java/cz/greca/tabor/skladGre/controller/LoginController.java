@@ -39,10 +39,11 @@ public class LoginController {
 		// ses.setAttribute("userRole", "ADMIN");
 		// return "redirect:/gre/td/seznam";
 		
-		// if (adminService.findAll().isEmpty()) {
-		// ses.setAttribute("errorMessage", "Neexistuje ADMIN! Je třeba se obrátit na tvůrce aplikace a následně provést základní nastavení aplikace.");
-		// return "redirect:/gre/errorPage";
-		// }
+//		if (adminService.findAll().isEmpty()) {
+//			ses.setAttribute("errorMessage",
+//					"Neexistuje ADMIN! Je třeba se obrátit na tvůrce aplikace a následně provést základní nastavení aplikace.");
+//			return "redirect:/gre/errorPage";
+//		}
 		
 		List<User> u = userService.findAllByOrderByNickAsc();
 		model.addAttribute("listUser", u);
