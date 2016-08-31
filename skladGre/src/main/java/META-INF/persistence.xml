@@ -14,10 +14,11 @@
 		<class>cz.greca.tabor.skladGre.entity.Den</class>
 		<class>cz.greca.tabor.skladGre.entity.Mj</class>
 		<class>cz.greca.tabor.skladGre.entity.Potravina</class>
+		<class>cz.greca.tabor.skladGre.entity.Role</class>
+		<class>cz.greca.tabor.skladGre.entity.RoleList</class>
 		<class>cz.greca.tabor.skladGre.entity.Sklad</class>
 		<class>cz.greca.tabor.skladGre.entity.Tabor</class>
 		<class>cz.greca.tabor.skladGre.entity.User</class>
-		<class>cz.greca.tabor.skladGre.entity.Role</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />

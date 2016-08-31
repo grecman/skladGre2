@@ -2,8 +2,8 @@ http://www.dirigible.io/help/tomcat_postgresql.html
 
 https://jdbc.postgresql.org/download.html
 
+context.xml
 <Context>
-
 	<WatchedResource>WEB-INF/web.xml</WatchedResource>
 	
 	<Resource name="jdbc/skladGre" auth="Container"
@@ -11,5 +11,8 @@ https://jdbc.postgresql.org/download.html
 	url="jdbc:postgresql://127.0.0.1:5432/greca_db"
 	username="greca" password="****gg0****" maxActive="20"
 	maxIdle="10" maxWait="-1"/>
-	
 </Context>
+
+
+VM argument
+-Dlog4j.configuration=file:///c:/Java_gre/lib/log4j.properties -Dhibernate.show_sql=false -Dhibernate.format_sql=false

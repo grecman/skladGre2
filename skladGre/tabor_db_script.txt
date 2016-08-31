@@ -1,9 +1,17 @@
--- ocekava se existence role "greca" (spustit pod SU)
+-- ocekava se existence role "greca" a databaze "greca_db" (spustit pod SU)
    
 CREATE ROLE greca LOGIN 
   ENCRYPTED PASSWORD 'md5bae43d63d2e8a2b4badf7b71e817250c'
   VALID UNTIL 'infinity'
   NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
 COMMENT ON ROLE greca IS 'pass: klasika_gg0';
+
+CREATE DATABASE greca_db
+  WITH OWNER = greca
+       ENCODING = 'UTF8'
+       TABLESPACE = pg_default
+       LC_COLLATE = 'Czech_Czech Republic.1250'
+       LC_CTYPE = 'Czech_Czech Republic.1250'
+       CONNECTION LIMIT = -1;
    
--- dale u dumpu (file: tabor_db_greca3.backup) vytvorit databazi "greca_db", vlastnikem bude role "greca"
+Dale z dumpu (file: schema_tabor.backup) vytvorit schema "tabor" v db "greca_db", vlastnikem bude "greca" (role).

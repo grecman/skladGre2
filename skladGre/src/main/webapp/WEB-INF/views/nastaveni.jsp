@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -15,28 +16,55 @@
 		<c:set scope="request" var="selectedMenu" value="nastaveni" />
 		<jsp:include page="header.jsp" />
 		<div class="mainAreaWide">
-			<h5>Zadat celkovy pocet lidi na tabore (nebo ho spocitat v pripade, ze bude zadano komplet taborove osazenstvo), dale financni normu
-				na jednoho jedince na den (tusim, ze ted to bylo 110,-) a z toho pocitat normu na den (viz paramert u taborovych dnu, ktery nyni zadavam
-				jako konstantu).</h5>
-			<H3>Číselník měrných jednotek</H3>
-			<table style="table-layout: fixed;">
-				<col width="70px" />
-				<col width="150px" />
-				<thead>
-					<tr style="background-color: #dfe0e0;">
-						<th style="font-size: x-small;">MJ</th>
-						<th style="font-size: x-small;">Popis</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${mjList}" var="i">
-						<tr style="background-color: white;">
-							<td align="left">&#160;${i.mernaJednotka}</td>
-							<td align="left">${i.popis}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
+			<h5>Zadat celkovy pocet lidi na tabore (nebo ho spocitat v
+				pripade, ze bude zadano komplet taborove osazenstvo), dale financni
+				normu na jednoho jedince na den (tusim, ze ted to bylo 110,-) a z
+				toho pocitat normu na den (viz paramert u taborovych dnu, ktery nyni
+				zadavam jako konstantu).</h5>
+
+			<table style="border: 0">
+				<tr valign="top">
+					<td style="padding-right: 20px;"><H3>Číselník měrných
+							jednotek</H3>
+						<table style="table-layout: fixed;">
+							<col width="70px" />
+							<col width="150px" />
+							<thead>
+								<tr style="background-color: #dfe0e0;">
+									<th style="font-size: x-small;">MJ</th>
+									<th style="font-size: x-small;">Popis</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${mjList}" var="i">
+									<tr style="background-color: white;">
+										<td align="left">&#160;${i.mernaJednotka}</td>
+										<td align="left">${i.popis}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table></td>
+					<td><H3>Číselník rolí</H3>
+						<table style="table-layout: fixed;">
+
+							<col width="150px" />
+							<thead>
+								<tr style="background-color: #dfe0e0;">
+									<th style="font-size: x-small;">Role</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${roleList}" var="i">
+									<tr style="background-color: white;">
+										<td align="left">&#160;${i.role}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table></td>
+				</tr>
 			</table>
+
+			<div style="background-color: transparent; height: 20px;"></div>
 		</div>
 		<div class="pageFooter">
 			<jsp:include page="footerInfo.jsp" />

@@ -11,8 +11,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	List<User> findAllByOrderByNickAsc();
 
-	//@Query("select u from User u where u.nick = ?1") // toto tady nemusi byt !!!
-	User findByNick(String nick);
+	User findOneByNick(String nick);
 	
 //	@Query("SELECT g FROM User g WHERE g.role= ?1")  // tady ano! :)
 //	List<User> findNickByRole(String role);

@@ -29,9 +29,49 @@ public class FormObject {
 	private String mnozstvi;
 	
 	private Integer uctenka;
+		
+	private Boolean admin;
 	
-	private Boolean superAdmin;
+	private Integer rok;
 	
+	private String misto;
+	
+	private String beh;
+	
+	
+		
+	public Integer getRok() {
+		return rok;
+	}
+
+	public void setRok(Integer rok) {
+		this.rok = rok;
+	}
+
+	public String getMisto() {
+		return misto;
+	}
+
+	public void setMisto(String misto) {
+		this.misto = misto;
+	}
+
+	public String getBeh() {
+		return beh;
+	}
+
+	public void setBeh(String beh) {
+		this.beh = beh;
+	}
+
+	public Boolean getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -137,13 +177,4 @@ public class FormObject {
 		this.uctenka = uctenka;
 	}
 
-	public Boolean getSuperAdmin() {
-		return superAdmin;
-	}
-
-	public void setSuperAdmin(Boolean superAdmin) {
-		this.superAdmin = superAdmin;
-	}
-	
-	
 }

@@ -3,20 +3,21 @@ package cz.greca.tabor.skladGre.entity;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-
-/**
- * The persistent class for the tabor database table.
- * 
- */
 @Entity
 @Table(name="tabor", schema="tabor")
 public class Tabor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="TABOR_ID_GENERATOR", sequenceName="tabor.HIBERNATE_SEQUENCE")
+	@SequenceGenerator(name="TABOR_ID_GENERATOR", sequenceName="TABOR.HIBERNATE_SEQUENCE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TABOR_ID_GENERATOR")
 	private Long id;
 
@@ -25,16 +26,15 @@ public class Tabor implements Serializable {
 	private String misto;
 
 	private Integer rok;
-	
-	private String role;
-	
+
+	//bi-directional many-to-one association to Den
 	@OneToMany(mappedBy="tabor")
 	private Set<Den> dens;
 	
-	@ManyToOne
-	@JoinColumn(name="id_user")
-	private User user;
-	
+	//bi-directional many-to-one association to Den
+	@OneToMany(mappedBy="tabor")
+	private Set<Role> roles;
+
 	public Tabor() {
 	}
 
@@ -70,30 +70,26 @@ public class Tabor implements Serializable {
 		this.rok = rok;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public Set<Den> getDens() {
-		return dens;
+		return this.dens;
 	}
 
 	public void setDens(Set<Den> dens) {
 		this.dens = dens;
 	}
 
-	public User getUser() {
-		return user;
+	public Den addDen(Den den) {
+		getDens().add(den);
+		den.setTabor(this);
+
+		return den;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public Den removeDen(Den den) {
+		getDens().remove(den);
+		den.setTabor(null);
+
+		return den;
 	}
-	
-	
 
 }

@@ -13,7 +13,7 @@ import cz.greca.tabor.skladGre.repository.DenRepository;
 @Service
 public class DenService {
 
-	static Logger log = Logger.getLogger(Den.class);
+	static Logger log = Logger.getLogger(DenService.class);
 	
 //	@PersistenceContext 
 //	private EntityManager entityManager;

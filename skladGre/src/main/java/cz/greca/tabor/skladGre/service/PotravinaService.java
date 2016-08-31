@@ -15,7 +15,6 @@ import cz.greca.tabor.skladGre.repository.PotravinaRepository;
 @Service
 public class PotravinaService {
 
-	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(PotravinaService.class);
 	
 	@Autowired
@@ -29,6 +28,7 @@ public class PotravinaService {
 	}
 
 	public List<Potravina> findAll() {
+		log.trace("\t### findAll()");
 		return potravinaRepository.findAll();
 	}
 
@@ -49,13 +49,13 @@ public class PotravinaService {
 	}
 	
 	public Iterable<String> findPotravinaByString(String string) {
-		//log.debug("\t### findPotravinaByString("+string+")");
+		//log.trace("\t### findPotravinaByString("+string+")");
 		Iterable<String> gre = entityManager
 				.createQuery(
 						"select u.jmeno from Potravina u where u.jmeno like :string",
 						String.class).setParameter("string", string.toUpperCase() + "%")
 				.getResultList();
-		//log.debug("\t### findPotravinaByString("+gre.toString()+")");
+		//log.trace("\t### findPotravinaByString("+gre.toString()+")");
 		return gre;
 	}
 

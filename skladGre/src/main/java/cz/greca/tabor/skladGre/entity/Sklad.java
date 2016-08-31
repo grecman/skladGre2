@@ -10,13 +10,11 @@ public class Sklad implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="SKLAD_ID_GENERATOR", sequenceName="tabor.HIBERNATE_SEQUENCE")
+	@SequenceGenerator(name="SKLAD_ID_GENERATOR", sequenceName="TABOR.HIBERNATE_SEQUENCE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SKLAD_ID_GENERATOR")
-	private long id;
+	private Long id;
 
 	private Float cena;
-	
-	private Float mnozstvi;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="datum_prijmu")
@@ -26,44 +24,38 @@ public class Sklad implements Serializable {
 	@Column(name="datum_vydeje")
 	private Date datumVydeje;
 
-	private Integer uctenka;
-	
 	@Column(name="jmeno_potraviny")
 	private String jmenoPotraviny;
-	
+
 	@Column(name="merna_jednotka")
 	private String mernaJednotka;
 
-	//bi-directional many-to-one association to TaborovyDen
+	private Float mnozstvi;
+
+	private Integer uctenka;
+
+	//bi-directional many-to-one association to Den
 	@ManyToOne
 	@JoinColumn(name="id_den")
 	private Den den;
-	
+
 	public Sklad() {
 	}
 
-	public long getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	public Float getCena() {
-		return cena;
+		return this.cena;
 	}
 
 	public void setCena(Float cena) {
 		this.cena = cena;
-	}
-
-	public Float getMnozstvi() {
-		return mnozstvi;
-	}
-
-	public void setMnozstvi(Float mnozstvi) {
-		this.mnozstvi = mnozstvi;
 	}
 
 	public Date getDatumPrijmu() {
@@ -82,6 +74,30 @@ public class Sklad implements Serializable {
 		this.datumVydeje = datumVydeje;
 	}
 
+	public String getJmenoPotraviny() {
+		return this.jmenoPotraviny;
+	}
+
+	public void setJmenoPotraviny(String jmenoPotraviny) {
+		this.jmenoPotraviny = jmenoPotraviny;
+	}
+
+	public String getMernaJednotka() {
+		return this.mernaJednotka;
+	}
+
+	public void setMernaJednotka(String mernaJednotka) {
+		this.mernaJednotka = mernaJednotka;
+	}
+
+	public Float getMnozstvi() {
+		return this.mnozstvi;
+	}
+
+	public void setMnozstvi(Float mnozstvi) {
+		this.mnozstvi = mnozstvi;
+	}
+
 	public Integer getUctenka() {
 		return this.uctenka;
 	}
@@ -91,29 +107,11 @@ public class Sklad implements Serializable {
 	}
 
 	public Den getDen() {
-		return den;
+		return this.den;
 	}
 
 	public void setDen(Den den) {
 		this.den = den;
 	}
-
-	public String getJmenoPotraviny() {
-		return jmenoPotraviny;
-	}
-
-	public void setJmenoPotraviny(String jmenoPotraviny) {
-		this.jmenoPotraviny = jmenoPotraviny;
-	}
-
-	public String getMernaJednotka() {
-		return mernaJednotka;
-	}
-
-	public void setMernaJednotka(String mernaJednotka) {
-		this.mernaJednotka = mernaJednotka;
-	}
-
-
 
 }

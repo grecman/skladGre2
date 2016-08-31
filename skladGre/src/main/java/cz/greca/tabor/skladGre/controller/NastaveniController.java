@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cz.greca.tabor.skladGre.entity.Mj;
+import cz.greca.tabor.skladGre.entity.RoleList;
 import cz.greca.tabor.skladGre.obj.FormObject;
 import cz.greca.tabor.skladGre.service.MjService;
+import cz.greca.tabor.skladGre.service.RoleListService;
 
 @Controller
 @RequestMapping("/nastaveni")
@@ -24,68 +26,20 @@ public class NastaveniController {
 	@Autowired
 	private MjService mjService;
 
+	@Autowired
+	private RoleListService roleListService;
+
 	@RequestMapping("")
 	public String nastaveni(FormObject formObject, HttpServletRequest req, HttpSession ses, Model model) {
 		log.debug("###\t nastaveni()");
 
 		ses.setAttribute("pageTitle", "Nastavení různých hodnot");
 
-		if (mjService.findAll().size() != 7) {
-			log.debug("###\t Neexistuji merne jednotky nebo jich je malo ... zakladam.");
-			mjService.deleteAll();
-			try {
-				{
-					Mj mj = new Mj();
-					mj.setMernaJednotka("ks");
-					mj.setPopis("kusy");
-					mjService.save(mj);
-				}
-				{
-					Mj mj = new Mj();
-					mj.setMernaJednotka("g");
-					mj.setPopis("gram");
-					mjService.save(mj);
-				}
-				{
-					Mj mj = new Mj();
-					mj.setMernaJednotka("kg");
-					mj.setPopis("kilogram");
-					mjService.save(mj);
-				}
-				{
-					Mj mj = new Mj();
-					mj.setMernaJednotka("ml");
-					mj.setPopis("mililitr");
-					mjService.save(mj);
-				}
-				{
-					Mj mj = new Mj();
-					mj.setMernaJednotka("l");
-					mj.setPopis("litr");
-					mjService.save(mj);
-				}
-				{
-					Mj mj = new Mj();
-					mj.setMernaJednotka("mm");
-					mj.setPopis("milimetr");
-					mjService.save(mj);
-				}
-				{
-					Mj mj = new Mj();
-					mj.setMernaJednotka("cm2");
-					mj.setPopis("centimetr ctverecny");
-					mjService.save(mj);
-				}
-			} catch (Exception e) {
-				log.error(e);
-			}
-
-		}
-
-		//mjService.delete(mjService.findOneByMernaJednotka("cm2"));
-
 		List<Mj> mjList = mjService.findAll();
 		model.addAttribute("mjList", mjList);
+
+		List<RoleList> roleList = roleListService.findAll();
+		model.addAttribute("roleList", roleList);
 
 		return "nastaveni";
 

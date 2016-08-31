@@ -3,8 +3,8 @@
 		<entity-name>cz.greca.tabor.skladGre.entity.Potravina</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>108</entity-height>
-		<entity-X-Coordinate>440</entity-X-Coordinate>
-		<entity-Y-Coordinate>268</entity-Y-Coordinate>
+		<entity-X-Coordinate>590</entity-X-Coordinate>
+		<entity-Y-Coordinate>342</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -14,8 +14,8 @@
 		<entity-name>cz.greca.tabor.skladGre.entity.Sklad</entity-name>
 		<entity-width>148</entity-width>
 		<entity-height>266</entity-height>
-		<entity-X-Coordinate>253</entity-X-Coordinate>
-		<entity-Y-Coordinate>268</entity-Y-Coordinate>
+		<entity-X-Coordinate>412</entity-X-Coordinate>
+		<entity-Y-Coordinate>342</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -25,8 +25,8 @@
 		<entity-name>cz.greca.tabor.skladGre.entity.User</entity-name>
 		<entity-width>148</entity-width>
 		<entity-height>226</entity-height>
-		<entity-X-Coordinate>253</entity-X-Coordinate>
-		<entity-Y-Coordinate>20</entity-Y-Coordinate>
+		<entity-X-Coordinate>36</entity-X-Coordinate>
+		<entity-Y-Coordinate>26</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -37,7 +37,7 @@
 		<entity-width>120</entity-width>
 		<entity-height>206</entity-height>
 		<entity-X-Coordinate>50</entity-X-Coordinate>
-		<entity-Y-Coordinate>330</entity-Y-Coordinate>
+		<entity-Y-Coordinate>372</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -46,9 +46,20 @@
 	<entity>
 		<entity-name>cz.greca.tabor.skladGre.entity.Tabor</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>226</entity-height>
-		<entity-X-Coordinate>50</entity-X-Coordinate>
-		<entity-Y-Coordinate>30</entity-Y-Coordinate>
+		<entity-height>206</entity-height>
+		<entity-X-Coordinate>240</entity-X-Coordinate>
+		<entity-Y-Coordinate>231</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>cz.greca.tabor.skladGre.entity.RoleList</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>166</entity-height>
+		<entity-X-Coordinate>426</entity-X-Coordinate>
+		<entity-Y-Coordinate>24</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -56,10 +67,10 @@
 
 	<entity>
 		<entity-name>cz.greca.tabor.skladGre.entity.Mj</entity-name>
-		<entity-width>120</entity-width>
+		<entity-width>155</entity-width>
 		<entity-height>128</entity-height>
-		<entity-X-Coordinate>440</entity-X-Coordinate>
-		<entity-Y-Coordinate>396</entity-Y-Coordinate>
+		<entity-X-Coordinate>590</entity-X-Coordinate>
+		<entity-Y-Coordinate>477</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -68,9 +79,9 @@
 	<entity>
 		<entity-name>cz.greca.tabor.skladGre.entity.Role</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>108</entity-height>
-		<entity-X-Coordinate>440</entity-X-Coordinate>
-		<entity-Y-Coordinate>20</entity-Y-Coordinate>
+		<entity-height>148</entity-height>
+		<entity-X-Coordinate>240</entity-X-Coordinate>
+		<entity-Y-Coordinate>26</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>

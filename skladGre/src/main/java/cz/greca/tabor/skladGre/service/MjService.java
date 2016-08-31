@@ -12,7 +12,7 @@ import cz.greca.tabor.skladGre.repository.MjRepository;
 @Service
 public class MjService {
 
-	static Logger log = Logger.getLogger(Mj.class);
+	static Logger log = Logger.getLogger(MjService.class);
 	
 //	@PersistenceContext 
 //	private EntityManager entityManager;

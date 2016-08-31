@@ -11,32 +11,34 @@ public class Den implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="TABOROVYDEN_ID_GENERATOR", sequenceName="tabor.HIBERNATE_SEQUENCE")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TABOROVYDEN_ID_GENERATOR")
-	private long id;
+	@SequenceGenerator(name="DEN_ID_GENERATOR", sequenceName="TABOR.HIBERNATE_SEQUENCE")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="DEN_ID_GENERATOR")
+	private Long id;
 
 	@Temporal(TemporalType.DATE)
 	private Date den;
 
 	private Integer norma;
-	
+
 	private Integer poradi;
 
-	@OneToMany(mappedBy="den")
-	private Set<Sklad> sklads;
-	
+	//bi-directional many-to-one association to Tabor
 	@ManyToOne
 	@JoinColumn(name="id_tabor")
 	private Tabor tabor;
 
+	//bi-directional many-to-one association to Sklad
+	@OneToMany(mappedBy="den")
+	private Set<Sklad> sklads;
+
 	public Den() {
 	}
 
-	public long getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -56,6 +58,22 @@ public class Den implements Serializable {
 		this.norma = norma;
 	}
 
+	public Integer getPoradi() {
+		return this.poradi;
+	}
+
+	public void setPoradi(Integer poradi) {
+		this.poradi = poradi;
+	}
+
+	public Tabor getTabor() {
+		return this.tabor;
+	}
+
+	public void setTabor(Tabor tabor) {
+		this.tabor = tabor;
+	}
+
 	public Set<Sklad> getSklads() {
 		return this.sklads;
 	}
@@ -64,15 +82,18 @@ public class Den implements Serializable {
 		this.sklads = sklads;
 	}
 
-	public Integer getPoradi() {
-		return poradi;
+	public Sklad addSklad(Sklad sklad) {
+		getSklads().add(sklad);
+		sklad.setDen(this);
+
+		return sklad;
 	}
 
-	public void setPoradi(Integer poradi) {
-		this.poradi = poradi;
-	}
-	
-	
+	public Sklad removeSklad(Sklad sklad) {
+		getSklads().remove(sklad);
+		sklad.setDen(null);
 
+		return sklad;
+	}
 
 }

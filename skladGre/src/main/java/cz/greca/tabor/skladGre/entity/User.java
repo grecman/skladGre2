@@ -21,35 +21,43 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="USERS_ID_GENERATOR", sequenceName="tabor.HIBERNATE_SEQUENCE")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USERS_ID_GENERATOR")
-	private long id;
+	@SequenceGenerator(name="USER_ID_GENERATOR", sequenceName="TABOR.HIBERNATE_SEQUENCE")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USER_ID_GENERATOR")
+	private Long id;
 
 	private String nick;
 
 	private String password;
+	
+	private Boolean admin;
 
 	@Column(name="pocet_prihlaseni")
 	private Integer pocetPrihlaseni;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="posledni_prihlaseni")
 	private Date posledniPrihlaseni;
-	
-	@Column(name="super_admin")
-	private Boolean superAdmin;
-		
+
+	//bi-directional many-to-one association to Role
 	@OneToMany(mappedBy="user")
-	private Set<Tabor> tabors;
-	
+	private Set<Role> roles;
+
 	public User() {
 	}
+	
+	public Boolean getAdmin() {
+		return admin;
+	}
 
-	public long getId() {
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
+	}
+
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -84,23 +92,28 @@ public class User implements Serializable {
 	public void setPosledniPrihlaseni(Date posledniPrihlaseni) {
 		this.posledniPrihlaseni = posledniPrihlaseni;
 	}
-
-	public Set<Tabor> getTabors() {
-		return tabors;
+	
+	
+	public Set<Role> getRoles() {
+		return this.roles;
 	}
 
-	public void setTabors(Set<Tabor> tabors) {
-		this.tabors = tabors;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
-	public Boolean getSuperAdmin() {
-		return superAdmin;
+	public Role addRole(Role role) {
+		getRoles().add(role);
+		role.setUser(this);
+
+		return role;
 	}
 
-	public void setSuperAdmin(Boolean superAdmin) {
-		this.superAdmin = superAdmin;
+	public Role removeRole(Role role) {
+		getRoles().remove(role);
+		role.setUser(null);
+
+		return role;
 	}
-
-
 
 }

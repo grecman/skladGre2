@@ -3,6 +3,7 @@ package cz.greca.tabor.skladGre.service;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,8 @@ import cz.greca.tabor.skladGre.repository.SkladRepository;
 
 @Service
 public class SkladService {
+	
+	static Logger log = Logger.getLogger(SkladService.class);
 	
 	@Autowired
 	private SkladRepository skladRepository;

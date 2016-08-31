@@ -16,43 +16,43 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	static Logger log = Logger.getLogger("taborLogger"); 
-	
+	static Logger log = Logger.getLogger(UserService.class); 
+		
 //	@PersistenceContext
 //	private EntityManager entityManager;
 	
 	public void save(User user) {
-		log.debug("###\t save()");
+		log.trace("###\t save()");
 		userRepository.save(user);
 	}
 	
 	public void delete(User user) {
-		log.debug("###\t delete()");
+		log.trace("###\t delete()");
 		userRepository.delete(user);
 	}
 
 	public List<User> findAll() {
-		log.debug("###\t findAll()");
+		log.trace("###\t findAll()");
 		return userRepository.findAll();
 	}
 	
 	public List<User> findAllByOrderByNickAsc() {
-		log.debug("###\t findAllByOrderByNickAsc()");
+		log.trace("###\t findAllByOrderByNickAsc()");
 		return userRepository.findAllByOrderByNickAsc();
 	}
 	
 	public User findOne(long id) {
-		log.debug("###\t findOne("+id+ ")");
+		log.trace("###\t findOne("+id+ ")");
 		return userRepository.findOne(id);
 	}
 	
-	public User findByNick(String nick) {
-		log.debug("###\t findbyNick("+nick+ ")");
-		return userRepository.findByNick(nick);
+	public User findOneByNick(String nick) {
+		log.trace("###\t findOnebyNick("+nick+ ")");
+		return userRepository.findOneByNick(nick);
 	}
 	
 //	public List<User> findNickByRole(String role){
-//		log.debug("###\t findNickByRole("+role+ ")");
+//		log.trace("###\t findNickByRole("+role+ ")");
 //		return userRepository.findNickByRole(role);
 //	}
 	

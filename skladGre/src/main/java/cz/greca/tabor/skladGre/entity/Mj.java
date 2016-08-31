@@ -1,22 +1,16 @@
 package cz.greca.tabor.skladGre.entity;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
-@Entity 
+@Entity
 @Table(name="mj", schema="tabor")
 public class Mj implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="MJ_ID_GENERATOR", sequenceName="tabor.HIBERNATE_SEQUENCE")
+	@SequenceGenerator(name="MJ_ID_GENERATOR", sequenceName="TABOR.HIBERNATE_SEQUENCE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="MJ_ID_GENERATOR")
 	private Long id;
 
@@ -24,7 +18,7 @@ public class Mj implements Serializable {
 	private String mernaJednotka;
 
 	private String popis;
-	
+
 	public Mj() {
 	}
 
